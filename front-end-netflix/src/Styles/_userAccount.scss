@@ -1,0 +1,80 @@
+.userAccount {
+    @extend .homePage;
+
+    .accountForm {
+        height: 550px;
+        width: 400px;
+        margin: 0 auto;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        opacity: 90%;
+
+        .accountText {
+            font-size: 1.6em;
+            font-weight: bold;
+            margin-right: 80px;
+        }
+
+        .accountInput {
+            width: 285px;
+            height: 45px;
+            margin: 0 auto 15px auto;
+            border: none;
+            border-radius: 5px;
+            background-color: #333333;
+            color: white;
+            padding: 0 0 0 15px;
+        }
+
+        .registerInput:focus {
+            background-color: #333333;
+        }
+
+        .accountBtn {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 45px;
+            width: 300px;
+            margin: 12px auto 0 auto;
+            font-size: 1.1em;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .accountTextBottom {
+            color: rgb(129, 129, 129);
+            margin-top: 30px;
+
+            .accountLink {
+                text-decoration: none;
+                color: white;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .successRegister {
+        @extend .accountForm;
+        height: 220px;
+        width: 500px;
+        margin-top: 10vh;
+
+        .successText1 {
+            font-size: 1.8em;
+        }
+
+        .successText2 {
+            font-size: 1.5em;
+        }
+
+        .successLink {
+            @extend .accountBtn;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

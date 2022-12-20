@@ -1,0 +1,78 @@
+.register {
+    @extend .homePage;
+
+    .registerForm {
+        height: 550px;
+        width: 400px;
+        margin: 0 auto;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+
+        .registerText {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-right: 140px;
+        }
+
+        .registerInput {
+            width: 285px;
+            height: 45px;
+            margin: 0 auto 15px auto;
+            border: none;
+            border-radius: 5px;
+            background-color: #333333;
+            color: white;
+            padding: 0 0 0 15px;
+        }
+
+        .registerInput:focus {
+            background-color: #333333;
+        }
+
+        .registerButton {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 45px;
+            width: 300px;
+            margin: 25px auto 0 auto;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .registerTextBottom {
+            color: rgb(129, 129, 129);
+            margin-top: 30px;
+
+            .registerLink {
+                text-decoration: none;
+                color: white;
+                margin-left: 5px;
+            }
+        }
+    }
+
+    .successRegister {
+        @extend .registerForm;
+        height: 300px;
+        width: 500px;
+
+        .successText1 {
+            font-size: 1.8em;
+        }
+
+        .successText2 {
+            font-size: 1.5em;
+        }
+
+        .successLink {
+            @extend .registerButton;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}

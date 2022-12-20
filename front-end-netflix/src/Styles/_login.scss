@@ -1,0 +1,57 @@
+.login {
+    @extend .homePage;
+
+    .loginForm {
+        background-color: black;
+        height: 500px;
+        width: 400px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        .loginText {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-right: 150px;
+        }
+
+        .loginInput {
+            width: 285px;
+            height: 45px;
+            margin: 0 auto 15px auto;
+            border: none;
+            border-radius: 5px;
+            background-color: #333333;
+            color: white;
+            padding: 0 0 0 15px;
+        }
+
+        .loginInput:focus {
+            background-color: #333333;
+        }
+
+        .loginButton {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            height: 45px;
+            width: 300px;
+            margin: 25px auto 0 auto;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .loginTextBottom {
+            color: rgb(129, 129, 129);
+            margin-top: 30px;
+
+            .loginLink {
+                text-decoration: none;
+                color: white;
+                margin-left: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,86 @@
+.manageUsers {
+    @extend .homePage;
+    position: relative;
+
+    .manageUsersContainer {
+        background-color: black;
+        height: 500px;
+        max-height: 500px;
+        width: 600px;
+        margin: 0 auto;
+        opacity: 90%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        .manageUsersTitle {
+            font-size: 1.6em;
+        }
+
+        .mappedUsers {
+            position: relative;
+            margin: 0 50% 10px 10px;
+            width: 100%;
+            text-align: left;
+
+            .mappedUsersButton {
+                background-color: #333333;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                height: 25px;
+                width: 80px;
+                font-size: 1.1em;
+                text-decoration: none;
+                position: absolute;
+                right: 5%;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.showSuccess {
+    background-color: gray;
+    height: 160px;
+    width: 500px;
+    position: absolute;
+    top: 30%;
+    right: 37%;
+
+    .okBannedButton {
+        background-color: #333333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        height: 25px;
+        width: 80px;
+        font-size: 1.1em;
+        text-decoration: none;
+        right: 5%;
+        cursor: pointer;
+    }
+}
+
+.manageUsersReturnBtn {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 45px;
+    width: 250px;
+    font-size: 1.1em;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+::-webkit-scrollbar {
+    background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: rgb(78, 78, 78);
+    border-radius: 9px;
+    border: 3px solid transparent;
+}

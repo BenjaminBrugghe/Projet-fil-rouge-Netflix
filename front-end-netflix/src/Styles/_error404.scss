@@ -1,0 +1,18 @@
+.error404 {
+    @extend .homePage;
+
+    .errorText {
+        font-size: 3em;
+    }
+
+    .errorButton {
+        background-color: #e50914;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        height: 38px;
+        width: 100px;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+}

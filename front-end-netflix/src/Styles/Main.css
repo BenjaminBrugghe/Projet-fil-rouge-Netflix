@@ -1,0 +1,562 @@
+.App {
+  position: relative;
+  background: url(../../public/images/netflix-background.jpg);
+  background-size: cover;
+}
+
+.homePage, .manageUsers, .userAccount, .register, .login, .error404 {
+  height: 80vh;
+  color: white;
+}
+.homePage .homeText, .manageUsers .homeText, .userAccount .homeText, .register .homeText, .login .homeText, .error404 .homeText {
+  height: 500px;
+  width: 900px;
+  margin: 15vh auto 0 auto;
+}
+.homePage .homeText .homeTextOne, .manageUsers .homeText .homeTextOne, .userAccount .homeText .homeTextOne, .register .homeText .homeTextOne, .login .homeText .homeTextOne, .error404 .homeText .homeTextOne {
+  font-size: 4em;
+  font-weight: bold;
+}
+.homePage .homeText .homeTextTwo, .manageUsers .homeText .homeTextTwo, .userAccount .homeText .homeTextTwo, .register .homeText .homeTextTwo, .login .homeText .homeTextTwo, .error404 .homeText .homeTextTwo {
+  font-size: 2em;
+}
+.homePage .homeText .homeTextThree, .manageUsers .homeText .homeTextThree, .userAccount .homeText .homeTextThree, .register .homeText .homeTextThree, .login .homeText .homeTextThree, .error404 .homeText .homeTextThree {
+  font-size: 1.4em;
+  margin-bottom: 50px;
+}
+.homePage .homeText .homeRegisterLink, .manageUsers .homeText .homeRegisterLink, .userAccount .homeText .homeRegisterLink, .register .homeText .homeRegisterLink, .login .homeText .homeRegisterLink, .error404 .homeText .homeRegisterLink {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #e50914;
+  border-radius: 7px;
+  padding: 15px 20px;
+}
+
+.error404 .errorText {
+  font-size: 3em;
+}
+.error404 .errorButton {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  height: 38px;
+  width: 100px;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.header {
+  background: linear-gradient(black, transparent);
+  height: 10vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.header .headerLogo {
+  background: url(../../public/images/logo-netflix2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 10vw;
+  margin-left: 2vw;
+}
+.header .headerLinks .headerLink {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2em;
+  margin-left: 25px;
+}
+.header .headerIcons {
+  background-color: transparent;
+  height: 40px;
+  width: 150px;
+  position: absolute;
+  right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .headerIcons .headerUserIcon, .header .headerIcons .headerMovieIcon {
+  color: white;
+  font-size: 2em;
+  height: 40px;
+  width: 40px;
+  margin: 0 40px 0 0;
+}
+.header .headerIcons .headerUserIcon::after, .header .headerIcons .headerMovieIcon::after {
+  content: "Gerer les utilisateurs";
+  position: absolute;
+  top: 120%;
+  right: 40%;
+  font-size: 0.5em;
+  z-index: -1;
+}
+.header .headerIcons .headerUserIcon:hover::after, .header .headerIcons .headerMovieIcon:hover::after {
+  z-index: 2;
+}
+.header .headerIcons .headerMovieIcon::after {
+  content: "Gerer les videos";
+  position: absolute;
+  top: 120%;
+  right: -20%;
+  font-size: 0.5em;
+  z-index: -1;
+}
+.header .headerIcons .headerMovieIcon:hover::after {
+  z-index: 2;
+}
+.header .headerLoginBtn, .header .headerAccountBtn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  height: 38px;
+  width: 120px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  right: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.header .headerAccountBtn {
+  background-color: #333333;
+  font-weight: normal;
+}
+
+.accountInfos {
+  background-color: #333333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  position: absolute;
+  right: 3%;
+  top: 70%;
+  height: 160px;
+  width: 250px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.accountInfos .accountMenu {
+  margin: 10px 0 5px 0;
+  text-decoration: none;
+  color: white;
+}
+.accountInfos .accountMenu:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.hiddenClass {
+  z-index: -10;
+  position: absolute;
+  top: -200%;
+  left: -200%;
+}
+
+.footer {
+  background-color: black;
+  color: lightgray;
+  width: 100%;
+  height: 35vh;
+  position: relative;
+  z-index: 2;
+}
+.footer .footerLogos {
+  position: absolute;
+  left: 26%;
+  padding-top: 20px;
+}
+.footer .footerLogos .footerButton {
+  background-color: black;
+  border: none;
+  text-decoration: none;
+  color: white;
+  font-size: 1.6em;
+}
+.footer .footerLogos .footerButton i {
+  color: white;
+  margin: 0 5px;
+  padding: 10px;
+  size: 150%;
+}
+.footer .footerLinks {
+  display: flex;
+  padding: 35px 450px;
+}
+.footer .footerLinks .footerLink {
+  margin: 30px auto -10px auto;
+}
+.footer .footerLinks .footerLink div {
+  margin: 20px 0;
+  font-size: 0.9em;
+  color: lightgray;
+}
+.footer .footerLinks .footerLink div:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.footer p {
+  padding-bottom: 20px;
+}
+
+.login .loginForm {
+  background-color: black;
+  height: 500px;
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.login .loginForm .loginText {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-right: 150px;
+}
+.login .loginForm .loginInput {
+  width: 285px;
+  height: 45px;
+  margin: 0 auto 15px auto;
+  border: none;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  padding: 0 0 0 15px;
+}
+.login .loginForm .loginInput:focus {
+  background-color: #333333;
+}
+.login .loginForm .loginButton {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  width: 300px;
+  margin: 25px auto 0 auto;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+}
+.login .loginForm .loginTextBottom {
+  color: rgb(129, 129, 129);
+  margin-top: 30px;
+}
+.login .loginForm .loginTextBottom .loginLink {
+  text-decoration: none;
+  color: white;
+  margin-left: 5px;
+}
+
+.register .registerForm, .register .successRegister {
+  height: 550px;
+  width: 400px;
+  margin: 0 auto;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+}
+.register .registerForm .registerText, .register .successRegister .registerText {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-right: 140px;
+}
+.register .registerForm .registerInput, .register .successRegister .registerInput {
+  width: 285px;
+  height: 45px;
+  margin: 0 auto 15px auto;
+  border: none;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  padding: 0 0 0 15px;
+}
+.register .registerForm .registerInput:focus, .register .successRegister .registerInput:focus {
+  background-color: #333333;
+}
+.register .registerForm .registerButton, .register .successRegister .registerButton, .register .successRegister .successLink {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  width: 300px;
+  margin: 25px auto 0 auto;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: none;
+}
+.register .registerForm .registerTextBottom, .register .successRegister .registerTextBottom {
+  color: rgb(129, 129, 129);
+  margin-top: 30px;
+}
+.register .registerForm .registerTextBottom .registerLink, .register .successRegister .registerTextBottom .registerLink {
+  text-decoration: none;
+  color: white;
+  margin-left: 5px;
+}
+.register .successRegister {
+  height: 300px;
+  width: 500px;
+}
+.register .successRegister .successText1 {
+  font-size: 1.8em;
+}
+.register .successRegister .successText2 {
+  font-size: 1.5em;
+}
+.register .successRegister .successLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.feed {
+  background-color: black;
+}
+.feed .currentVideo {
+  color: white;
+  position: relative;
+  top: -10vh;
+  height: 80vh;
+}
+.feed .currentVideo .video {
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.feed .currentVideo .currentTitle {
+  position: relative;
+  font-size: 5em;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 20px;
+  padding-top: 300px;
+}
+.feed .currentVideo .currentDescription {
+  position: relative;
+  text-align: left;
+  font-size: 1.5em;
+  width: 75vh;
+  margin-left: 20px;
+  margin-top: -50px;
+}
+.feed .currentVideo .feedButtons {
+  display: flex;
+  margin: 130px 40px;
+}
+.feed .currentVideo .feedButtons .buttonPlay,
+.feed .currentVideo .feedButtons .buttonInfos {
+  background-color: rgb(155, 155, 155);
+  color: rgb(55, 55, 55);
+  width: 160px;
+  height: 55px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1.4em;
+  margin: 0 20px 0 0;
+  z-index: 1;
+}
+.feed .currentVideo .feedButtons .buttonPlay:hover,
+.feed .currentVideo .feedButtons .buttonInfos:hover {
+  background-color: rgb(139, 139, 139);
+  transform: scale(120%);
+  transition: 0.2s;
+  cursor: pointer;
+}
+.feed .currentVideo .feedButtons .buttonPlay i,
+.feed .currentVideo .feedButtons .buttonInfos i {
+  margin: 0 15px 0 0;
+  color: rgb(225, 225, 225);
+}
+.feed .rowsContainer {
+  background-color: black;
+  color: black;
+  height: 24vh;
+}
+.feed .rowsContainer .rowsTitle {
+  background-color: black;
+  color: white;
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-left: 1%;
+  text-align: left;
+}
+.feed .rowsContainer .rowsImages {
+  display: flex;
+  overflow-y: hidden;
+}
+.feed .rowsContainer .rowsImages .rowsImage {
+  margin-right: 10px;
+  padding: 70px 140px;
+  background-size: cover;
+}
+.feed .rowsContainer .rowsImages .rowsImage:hover {
+  cursor: pointer;
+  transform: scale(175%);
+  transition: 0.5s ease;
+}
+.feed .rowsContainer ::-webkit-scrollbar {
+  background-color: black;
+}
+.feed .rowsContainer ::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  background-color: rgb(78, 78, 78);
+  border-radius: 9px;
+  border: 3px solid transparent;
+}
+
+.userAccount .accountForm, .userAccount .successRegister {
+  height: 550px;
+  width: 400px;
+  margin: 0 auto;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  opacity: 90%;
+}
+.userAccount .accountForm .accountText, .userAccount .successRegister .accountText {
+  font-size: 1.6em;
+  font-weight: bold;
+  margin-right: 80px;
+}
+.userAccount .accountForm .accountInput, .userAccount .successRegister .accountInput {
+  width: 285px;
+  height: 45px;
+  margin: 0 auto 15px auto;
+  border: none;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  padding: 0 0 0 15px;
+}
+.userAccount .accountForm .registerInput:focus, .userAccount .successRegister .registerInput:focus {
+  background-color: #333333;
+}
+.userAccount .accountForm .accountBtn, .userAccount .successRegister .accountBtn, .userAccount .successRegister .successLink {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  width: 300px;
+  margin: 12px auto 0 auto;
+  font-size: 1.1em;
+  text-decoration: none;
+  cursor: pointer;
+}
+.userAccount .accountForm .accountTextBottom, .userAccount .successRegister .accountTextBottom {
+  color: rgb(129, 129, 129);
+  margin-top: 30px;
+}
+.userAccount .accountForm .accountTextBottom .accountLink, .userAccount .successRegister .accountTextBottom .accountLink {
+  text-decoration: none;
+  color: white;
+  margin-left: 5px;
+}
+.userAccount .successRegister {
+  height: 220px;
+  width: 500px;
+  margin-top: 10vh;
+}
+.userAccount .successRegister .successText1 {
+  font-size: 1.8em;
+}
+.userAccount .successRegister .successText2 {
+  font-size: 1.5em;
+}
+.userAccount .successRegister .successLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.manageUsers {
+  position: relative;
+}
+.manageUsers .manageUsersContainer {
+  background-color: black;
+  height: 500px;
+  max-height: 500px;
+  width: 600px;
+  margin: 0 auto;
+  opacity: 90%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.manageUsers .manageUsersContainer .manageUsersTitle {
+  font-size: 1.6em;
+}
+.manageUsers .manageUsersContainer .mappedUsers {
+  position: relative;
+  margin: 0 50% 10px 10px;
+  width: 100%;
+  text-align: left;
+}
+.manageUsers .manageUsersContainer .mappedUsers .mappedUsersButton {
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 80px;
+  font-size: 1.1em;
+  text-decoration: none;
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
+}
+
+.showSuccess {
+  background-color: gray;
+  height: 160px;
+  width: 500px;
+  position: absolute;
+  top: 30%;
+  right: 37%;
+}
+.showSuccess .okBannedButton {
+  background-color: #333333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 25px;
+  width: 80px;
+  font-size: 1.1em;
+  text-decoration: none;
+  right: 5%;
+  cursor: pointer;
+}
+
+.manageUsersReturnBtn {
+  background-color: #e50914;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 45px;
+  width: 250px;
+  font-size: 1.1em;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+::-webkit-scrollbar {
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  background-color: rgb(78, 78, 78);
+  border-radius: 9px;
+  border: 3px solid transparent;
+}/*# sourceMappingURL=Main.css.map */
