@@ -8,10 +8,8 @@ import { getAllUsers } from '../Datas/ApiServices';
 const Login = () => {
 
     const [userList, setUserList] = useState([]);
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const _navigate = useNavigate();
 
     /**
@@ -26,16 +24,7 @@ const Login = () => {
         getUsers();
 
     }, []);
-    
-    // document.addEventListener("keyup", function (event) {
-    //     if (event.key == "Enter") {
-    //         loginCLick();
-    //     }
-    // });
-    // return () => {
-    //     document.removeEventListener("keyup", loginCLick);
-    // }
-    
+
     /**
      * Vérifie les informations afin de connecter l'utilisateur et le renvoyer vers /feed.
      * Affiche une fenêtre avec un message en cas d'erreur.
@@ -55,19 +44,19 @@ const Login = () => {
         // Vérifie si l'utilisateur a été bannit et affiche un message d'erreur si c'est le cas.
         if (found) {
             if (currentUser.banned == 1) {
-                // alert('Erreur ! Votre compte a été bannit !');
+                alert('Erreur ! Votre compte a été bannit !');
             }
             else {
                 // Stockage des informations pour les récupèrer dans le <HeaderLogged> de /feed
-                    // L'id pour afficher les infos de l'utilisateur
-                    // Le user.admin pour afficher ou non les options Admin dans le header 
+                // L'id pour afficher les infos de l'utilisateur
+                // Le user.admin pour afficher ou non les options Admin dans le header 
                 localStorage.setItem('userId', currentUser.id);
                 localStorage.setItem('userAdmin', currentUser.admin);
                 _navigate('/feed');
             }
         }
         else {
-            // alert('Erreur ! E-mail ou mot de passe incorrect !');
+            alert('Erreur ! E-mail ou mot de passe incorrect !');
         }
     };
 
