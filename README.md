@@ -42,8 +42,3 @@ npm install
 npm start
 ```
 
-## Notes :
-
-20 Déc 2022 : Ce projet est toujours en "Work-in-progress"
-
-N'ayant appris que très récemment les bonnes pratiques du code et de React en général, une grosse refactorisation est à mes yeux nécessaire avant de compléter ce projet.
