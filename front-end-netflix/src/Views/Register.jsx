@@ -2,23 +2,21 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import { createUser, getAllUsers } from '../Datas/ApiServices';
+import RegisterPopUp from '../Components/RegisterPopUp';
 
 const Register = () => {
 
     const [userList, setUserList] = useState([]);
-
     const [lastname, setLastname] = useState('');
     const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
     const [showRegisterForm, setShowRegisterForm] = useState(true);
-    const [showSuccess, setShowSuccess] = useState(false); // 'successRegister'
-    const _navigate = useNavigate();
+    const [showSuccess, setShowSuccess] = useState(false);
 
     /**
      * Récupère la liste des utilisateurs
@@ -77,19 +75,6 @@ const Register = () => {
         }
     };
 
-    // document.addEventListener("keyup", function (event) {
-    //     if (event.key === "Enter") {
-    //         if (success == 'hiddenClass') {
-    //             registerClick();
-    //         }
-    //         else if (success == 'successRegister') {
-    //             _navigate('/login');
-    //         }
-    //     }
-    // });
-
-    console.log(userList);
-
     return (
         <div className='register'>
             <Header />
@@ -108,13 +93,7 @@ const Register = () => {
                     </p>
                 </div>
             }
-            {showSuccess &&
-                <div className="successRegister">
-                    <p className="successText1">Votre compte a été créé avec succès !</p>
-                    <p className="successText2">Connectez vous dès maintenant !</p>
-                    <Link to='/login' className='successLink'>S'identifier</Link>
-                </div>
-            }
+            {showSuccess && <RegisterPopUp />}
         </div>
     );
 };
