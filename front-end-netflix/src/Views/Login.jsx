@@ -48,7 +48,7 @@ const Login = () => {
         // Vérifie si l'utilisateur a été bannit et affiche un message d'erreur si c'est le cas.
         if (found) {
             if (currentUser.banned == 1) {
-                alert('Erreur ! Votre compte a été bannit !');
+                alert('Erreur ! Votre compte a été suspendu !');
             }
             else {
                 // Stockage des informations pour les récupèrer dans le <HeaderLogged> de /feed
