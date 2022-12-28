@@ -7,9 +7,13 @@ import { getAllUsers } from '../Datas/ApiServices';
 
 const Login = () => {
 
+    // Liste des utilisateurs
     const [userList, setUserList] = useState([]);
+
+    // Pour récupérer les informations de l'utilisateur
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
     const _navigate = useNavigate();
 
     /**
