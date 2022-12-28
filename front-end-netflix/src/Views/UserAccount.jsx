@@ -24,6 +24,21 @@ const UserAccount = () => {
     // Affiche une fenêtre de confirmation de modification.
     const [showSuccess, setShowSuccess] = useState(false);
 
+    // Pour vérification des Regex
+    const [lastnameRegexOK, setLastnameRegexOK] = useState(false);
+    const [firstnameRegexOK, setFirstnameRegexOK] = useState(false);
+    const [emailRegexOK, setEmailRegexOK] = useState(false);
+    const [passwordRegexOK, setPasswordRegexOK] = useState(false);
+    const [confirmPasswordRegexOK, setConfirmPassWordRegexOk] = useState(false);
+
+    // Regex pour les inputs
+    const regexName = /^[a-zA-ZÀ-ÿ\s\-]{3,}$/; // 3 caractères minimum, lettres, espaces et tirets
+    const regexEmail = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/; // Format email
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/; // 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
+
+    // Pour vérifier que l'email n'est pas déjà utilisé
+    const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(true);
+
     const _navigate = useNavigate();
 
     /**
@@ -56,25 +71,108 @@ const UserAccount = () => {
     function modificationClick(event) {
         event.preventDefault();
 
-        if (password != '' && password != confirmPassword) {
-            alert("Erreur ! Les deux mots de passe doivent correspondre")
+        // Vérification des Regex
+        checkLastnameRegex(lastname == '' ? currentUser.lastname : lastname);
+        checkFirstnameRegex(firstname == '' ? currentUser.firstname : firstname);
+        checkEmailRegex(email == '' ? currentUser.email : email);
+        checkPasswordRegex(password);
+        checkConfirmPasswordRegex(confirmPassword);
+
+        // Vérifie que l'addresse email n'est pas déjà utilisée
+        userList.map((user) => {
+            if (user.email == email) {
+                alert('Erreur ! Cette adresse email est déjà utilisée');
+            }
+            else {
+                setEmailAlreadyUsed(false);
+            }
+        });
+
+        // Si l'email n'est pas déjà utilisé, vérifie que les mots de passe correspondent
+        if (emailAlreadyUsed == false) {
+            if (password != '' && password != confirmPassword) {
+                alert("Erreur ! Les deux mots de passe doivent correspondre")
+            }
+            else if (password == '' && currentUser.password != confirmPassword) {
+                alert("Erreur ! Veuillez confirmer votre mot de passe");
+            }
+            else { // Si les mots de passe correspondent, vérifie que les Regex sont OK
+                if (lastnameRegexOK && firstnameRegexOK && emailRegexOK && passwordRegexOK && confirmPasswordRegexOK) {
+                    const newUser = {
+                        id: currentUser.id,
+                        lastname: lastname ? lastname : currentUser.lastname,
+                        firstname: firstname ? firstname : currentUser.firstname,
+                        email: email ? email : currentUser.email,
+                        password: password ? password : currentUser.password,
+                        admin: currentUser.admin,
+                        banned: currentUser.banned,
+                        token: currentUser.token
+                    }
+                    editUser(newUser);
+                    alert("Informations modifiées avec succès !")
+                    resetInputs();
+                }
+            }
         }
-        else if (password == '' && currentUser.password != confirmPassword) {
-            alert("Erreur ! Veuillez confirmer votre mot de passe");
+    };
+
+    /**
+    * Vérifie que le nom contient au moins 3 caractères et pas de nombres
+    */
+    const checkLastnameRegex = (lastname) => {
+        if (regexName.test(lastname)) {
+            setLastnameRegexOK(true);
         }
         else {
-            const newUser = {
-                id: currentUser.id,
-                lastname: lastname ? lastname : currentUser.lastname,
-                firstname: firstname ? firstname : currentUser.firstname,
-                email: email ? email : currentUser.email,
-                password: password ? password : currentUser.password,
-                admin: currentUser.admin,
-                banned: currentUser.banned,
-                token: currentUser.token
-            }
-            editUser(newUser);
-            resetInputs();
+            alert("Erreur ! Le nom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
+        }
+    };
+
+    /**
+     * Vérifie que le prénom contient au moins 3 caractères et pas de nombres
+     */
+    const checkFirstnameRegex = (firstname) => {
+        if (regexName.test(firstname)) {
+            setFirstnameRegexOK(true);
+        }
+        else {
+            alert("Erreur ! Le prénom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
+        }
+    };
+
+    /**
+     * Vérifie que l'email est au bon format
+     */
+    const checkEmailRegex = (email) => {
+        if (regexEmail.test(email)) {
+            setEmailRegexOK(true);
+        }
+        else {
+            alert("Erreur ! L'adresse email n'est pas valide (Format : Example@email.com)")
+        }
+    };
+
+    /**
+     * Vérifie que le mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
+    const checkPasswordRegex = (password) => {
+        if (regexPassword.test(password)) {
+            setPasswordRegexOK(true);
+        }
+        else {
+            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
+        }
+    };
+
+    /**
+     * Vérifie que le 2ème mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
+    const checkConfirmPasswordRegex = (confirmPassword) => {
+        if (regexPassword.test(confirmPassword)) {
+            setConfirmPassWordRegexOk(true);
+        }
+        else {
+            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
         }
     };
 
