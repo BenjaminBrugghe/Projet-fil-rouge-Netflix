@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getAllMovies } from '../Datas/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
+import Rows from '../Components/Rows';
 
 const Feed = () => {
 
@@ -47,32 +48,9 @@ const Feed = () => {
                     }
                 })
             )}
-            <div className="rowsContainer">
-                <div className="rowsTitle">Movies</div>
-                <div className="rowsImages">
-                    {movieList && (
-                        movieList.map(movie => {
-                            const background = { backgroundImage: `url(${movie.imageUrl})`, backgroundPosition: "center center" }
-                            return (
-                                <button className="rowsImage" key={movie.id} style={background}></button>
-                            )
-                        })
-                    )}
-                </div>
-            </div>
-            <div className="rowsContainer">
-                <div className="rowsTitle">Movies</div>
-                <div className="rowsImages">
-                    {movieList && (
-                        movieList.map(movie => {
-                            const background = { backgroundImage: `url(${movie.imageUrl})`, backgroundPosition: "center center" }
-                            return (
-                                <button className="rowsImage" key={movie.id} style={background}></button>
-                            )
-                        })
-                    )}
-                </div>
-            </div>
+            <Rows mediaList={movieList} />
+            <Rows mediaList={movieList} />
+            <Rows mediaList={movieList} />
         </div>
     );
 };
