@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Rows = ({ mediaList }) => {
+const Rows = ({ rowTitle, mediaList }) => {
     return (
         <div className="rowsContainer">
-            <div className="rowsTitle">Movies</div>
+            <div className="rowsTitle">{rowTitle}</div>
             <div className="rowsImages">
                 {mediaList.map(media => {
                     const background = { backgroundImage: `url(${media.imageUrl})`, backgroundPosition: "center center" }
