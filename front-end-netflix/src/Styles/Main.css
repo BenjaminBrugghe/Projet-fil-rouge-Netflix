@@ -332,6 +332,7 @@
   position: absolute;
   left: 0;
   width: 100%;
+  height: 80vh;
 }
 .feed .currentVideo .currentTitle {
   position: relative;
@@ -351,7 +352,7 @@
 }
 .feed .currentVideo .feedButtons {
   display: flex;
-  margin: 130px 40px;
+  margin: 80px 40px;
 }
 .feed .currentVideo .feedButtons .buttonPlay,
 .feed .currentVideo .feedButtons .buttonInfos {

@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getAllMovies } from '../Datas/ApiServices';
+import { getAllMovies, getAllDocumentaries } from '../Datas/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
+import Rows from '../Components/Rows';
 
 const Feed = () => {
 
     const [movieList, setMovieList] = useState([]);
+    const [documentaryList, setDocumentaryList] = useState([]);
     const [currentVideo, setCurrentVideo] = useState('');
 
     /**
@@ -20,6 +22,19 @@ const Feed = () => {
         }
         getMovies();
     }, []);
+
+    /**
+     * Récupère la liste des documentaires (documentaryList).
+     */
+    useEffect(() => {
+        async function getDocumentaries() {
+            const response = await fetch(getAllDocumentaries.getDocumentaries);
+            const data = await response.json();
+            setDocumentaryList(data);
+        }
+        getDocumentaries();
+    }, []);
+
 
     // Génère un nombre aléatoire pour afficher une vidéo dans le lecteur.
     function randomize(min, max) {
@@ -47,32 +62,9 @@ const Feed = () => {
                     }
                 })
             )}
-            <div className="rowsContainer">
-                <div className="rowsTitle">Movies</div>
-                <div className="rowsImages">
-                    {movieList && (
-                        movieList.map(movie => {
-                            const background = { backgroundImage: `url(${movie.imageUrl})`, backgroundPosition: "center center" }
-                            return (
-                                <button className="rowsImage" key={movie.id} style={background}></button>
-                            )
-                        })
-                    )}
-                </div>
-            </div>
-            <div className="rowsContainer">
-                <div className="rowsTitle">Movies</div>
-                <div className="rowsImages">
-                    {movieList && (
-                        movieList.map(movie => {
-                            const background = { backgroundImage: `url(${movie.imageUrl})`, backgroundPosition: "center center" }
-                            return (
-                                <button className="rowsImage" key={movie.id} style={background}></button>
-                            )
-                        })
-                    )}
-                </div>
-            </div>
+            <Rows mediaList={movieList} rowTitle="Movies" />
+            <Rows mediaList={documentaryList} rowTitle="Documentaries" />
+            <Rows mediaList={movieList} rowTitle="" />
         </div>
     );
 };

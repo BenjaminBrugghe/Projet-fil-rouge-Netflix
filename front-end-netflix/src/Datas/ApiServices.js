@@ -1,10 +1,6 @@
 const _BASE_URL = 'http://localhost:5290/api';
 
-// export const getAllUser = async () => {
-//     const response = await fetch(_BASE_URL + '/Users');
-//     const data = await response.json();
-//     return data;
-// };
+// ********** USERS **********
 
 export const getAllUsers = {
     getUsers: `${_BASE_URL}/Users`
@@ -20,7 +16,7 @@ export const createUser = async (user) => {
         body: JSON.stringify({
             id: 0,
             lastname: user.lastname,
-            firstname : user.firstname,
+            firstname: user.firstname,
             email: user.email,
             password: user.password,
             admin: 0,
@@ -41,7 +37,7 @@ export const editUser = async (user) => {
         body: JSON.stringify({
             id: user.id,
             lastname: user.lastname,
-            firstname : user.firstname,
+            firstname: user.firstname,
             email: user.email,
             password: user.password,
             admin: user.admin,
@@ -53,6 +49,14 @@ export const editUser = async (user) => {
     return content;
 };
 
+// ********** MOVIES **********
+
 export const getAllMovies = {
     getMovies: `${_BASE_URL}/Movies`
+};
+
+// ********** DOCUMENTARIES **********
+
+export const getAllDocumentaries = {
+    getDocumentaries: `${_BASE_URL}/Documentaries`
 };
