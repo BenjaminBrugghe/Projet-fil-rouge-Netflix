@@ -103,6 +103,9 @@ const Register = () => {
         }
     };
 
+    /**
+     * Vérifie que le nom contient au moins 3 caractères et pas de nombres
+     */
     const checkLastnameRegex = () => {
         if (regexName.test(lastname)) {
             setLastnameRegexOK(true);
@@ -112,6 +115,9 @@ const Register = () => {
         }
     };
 
+    /**
+     * Vérifie que le prénom contient au moins 3 caractères et pas de nombres
+     */
     const checkFirstnameRegex = () => {
         if (regexName.test(firstname)) {
             setFirstnameRegexOK(true);
@@ -121,6 +127,9 @@ const Register = () => {
         }
     };
 
+    /**
+     * Vérifie que l'email est au bon format
+     */
     const checkEmailRegex = () => {
         if (regexEmail.test(email)) {
             setEmailRegexOK(true);
@@ -130,6 +139,9 @@ const Register = () => {
         }
     };
 
+    /**
+     * Vérifie que le mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
     const checkPasswordRegex = () => {
         if (regexPassword.test(password)) {
             setPasswordRegexOK(true);
@@ -139,6 +151,9 @@ const Register = () => {
         }
     };
 
+    /**
+     * Vérifie que le 2ème mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
     const checkConfirmPasswordRegex = () => {
         if (regexPassword.test(confirmPassword)) {
             setConfirmPassWordRegexOk(true);
