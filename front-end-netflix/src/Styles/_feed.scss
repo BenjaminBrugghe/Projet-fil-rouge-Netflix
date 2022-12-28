@@ -1,109 +1,109 @@
 .feed {
+  background-color: black;
+
+  .currentVideo {
+    color: white;
+    position: relative;
+    top: -10vh;
+    height: 80vh;
+
+    .video {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 80vh;
+    }
+
+    .currentTitle {
+      position: relative;
+      font-size: 5em;
+      font-weight: bold;
+      text-align: left;
+      margin-left: 20px;
+      padding-top: 300px;
+    }
+
+    .currentDescription {
+      position: relative;
+      text-align: left;
+      font-size: 1.5em;
+      width: 75vh;
+      margin-left: 20px;
+      margin-top: -50px;
+    }
+
+    .feedButtons {
+      display: flex;
+      margin: 80px 40px;
+
+      .buttonPlay,
+      .buttonInfos {
+        background-color: rgb(155, 155, 155);
+        color: rgb(55, 55, 55);
+        width: 160px;
+        height: 55px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 1.4em;
+        margin: 0 20px 0 0;
+        z-index: 1;
+
+        &:hover {
+          background-color: rgb(139, 139, 139);
+          transform: scale(120%);
+          transition: 0.2s;
+          cursor: pointer;
+        }
+
+        i {
+          margin: 0 15px 0 0;
+          color: rgb(225, 225, 225);
+        }
+      }
+    }
+  }
+
+  .rowsContainer {
     background-color: black;
+    color: black;
+    height: 24vh;
 
-    .currentVideo {
-        color: white;
-        position: relative;
-        top: -10vh;
-        height: 80vh;
-
-        .video {
-            position: absolute;
-            left: 0;
-            width: 100%;
-        }
-
-        .currentTitle {
-            position: relative;
-            font-size: 5em;
-            font-weight: bold;
-            text-align: left;
-            margin-left: 20px;
-            padding-top: 300px;
-        }
-
-        .currentDescription {
-            position: relative;
-            text-align: left;
-            font-size: 1.5em;
-            width: 75vh;
-            margin-left: 20px;
-            margin-top: -50px;
-        }
-
-        .feedButtons {
-            display: flex;
-            margin: 130px 40px;
-
-            .buttonPlay,
-            .buttonInfos {
-                background-color: rgb(155, 155, 155);
-                color: rgb(55, 55, 55);
-                width: 160px;
-                height: 55px;
-                border: none;
-                border-radius: 5px;
-                font-weight: bold;
-                font-size: 1.4em;
-                margin: 0 20px 0 0;
-                z-index: 1;
-
-                &:hover {
-                    background-color: rgb(139, 139, 139);
-                    transform: scale(120%);
-                    transition: 0.2s;
-                    cursor: pointer;
-                }
-
-                i {
-                    margin: 0 15px 0 0;
-                    color: rgb(225, 225, 225);
-                }
-            }
-        }
+    .rowsTitle {
+      background-color: black;
+      color: white;
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-left: 1%;
+      text-align: left;
     }
 
-    .rowsContainer {
-        background-color: black;
-        color: black;
-        height: 24vh;
+    .rowsImages {
+      display: flex;
+      overflow-y: hidden; //
 
-        .rowsTitle {
-            background-color: black;
-            color: white;
-            font-size: 2.2em;
-            font-weight: bold;
-            margin-left: 1%;
-            text-align: left;
-        }
+      .rowsImage {
+        margin-right: 10px;
+        padding: 70px 140px;
+        background-size: cover;
 
-        .rowsImages {
-            display: flex;
-            overflow-y: hidden;
-            
-            .rowsImage {
-                margin-right: 10px;
-                padding: 70px 140px;
-                background-size: cover;
-                
-                &:hover {
-                    cursor: pointer;
-                    transform: scale(175%);
-                    transition: 0.5s ease;
-                    // z-index: 3;
-                }
-            }
+        &:hover {
+          cursor: pointer;
+          transform: scale(175%);
+          transition: 0.5s ease;
         }
-
-        ::-webkit-scrollbar {
-            background-color: black;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background-clip: padding-box;
-            background-color: rgb(78, 78, 78);
-            border-radius: 9px;
-            border: 3px solid transparent;
-        }
+      }
     }
+
+    ::-webkit-scrollbar {
+      background-color: black;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-clip: padding-box;
+      background-color: rgb(78, 78, 78);
+      border-radius: 9px;
+      border: 3px solid transparent;
+    }
+  }
 }
