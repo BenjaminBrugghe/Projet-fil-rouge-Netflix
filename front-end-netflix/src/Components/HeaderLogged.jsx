@@ -5,15 +5,24 @@ import { getAllUsers } from '../Datas/ApiServices';
 import axios from 'axios';
 
 const HeaderLogged = () => {
-    const [userOptions, setUserOptions] = useState('hiddenClass'); // headerLinks
-    const [adminOptions, setAdminOptions] = useState('hiddenClass'); // headerIcons
-    const [show, setShow] = useState(false);
-
+    // Liste des utilisateurs.
     const [userList, setUserList] = useState([]);
+
+    // L'utilisateur connecté
     const [currentUser, setCurrentuser] = useState('');
 
-    useEffect(() => {
+    // Affichage des options utilisateurs/admins du Header
+    const [showUserOptions, setShowUserOptions] = useState(false);
+    const [showAdminOptions, setShowAdminOptions] = useState(false);
 
+    // Affichage des informations de l'utilisateur connecté
+    const [showAccountInfo, setShowAccountInfo] = useState(false);
+
+    /**
+     * Récupère la liste des utilisateurs (userList).
+     * Affiche les options d'administration si l'utilisateur est admin.
+     */
+    useEffect(() => {
         async function getUsers() {
             const response = await axios.get(getAllUsers.getUsers);
             const data = await response.data;
@@ -22,39 +31,46 @@ const HeaderLogged = () => {
         getUsers();
 
         if (localStorage.getItem('userAdmin') == 0) {
-            setUserOptions("headerLinks");
+            setShowUserOptions(true);
         }
         else if (localStorage.getItem('userAdmin') == 1) {
-            setUserOptions("headerLinks");
-            setAdminOptions("headerIcons");
+            setShowUserOptions(true);
+            setShowAdminOptions(true);
         }
     }, []);
 
+    /**
+     * Récupère les informations de l'utilisateur connecté.
+     */
     const accountClick = () => {
         userList.forEach((el) => {
             if (el.id == localStorage.getItem('userId')) {
                 setCurrentuser(el);
             }
         })
-        setShow(!show);
+        setShowAccountInfo(!showAccountInfo);
     };
 
     return (
         <div className='header'>
             <div className="headerLogo"></div>
-            <div className={userOptions}>
-                <Link className='headerLink'>Accueil</Link>
-                <Link className='headerLink'>Séries</Link>
-                <Link className='headerLink'>Films</Link>
-            </div>
-            <div className={adminOptions}>
-                <Link to='/manageUsers' className="headerUserIcon fa-solid fa-users" />
-                <Link to='#' className="headerMovieIcon fa-sharp fa-solid fa-video" />
-            </div>
+            {showUserOptions && (
+                <div className="headerLinks">
+                    <Link className='headerLink'>Accueil</Link>
+                    <Link className='headerLink'>Séries</Link>
+                    <Link className='headerLink'>Films</Link>
+                </div>
+            )}
+            {showAdminOptions && (
+                <div className="headerIcons">
+                    <Link to='/manageUsers' className="headerUserIcon fa-solid fa-users" />
+                    <Link to='#' className="headerMovieIcon fa-sharp fa-solid fa-video" />
+                </div>
+            )}
             <Link className='headerAccountBtn' onClick={accountClick}>Mon compte</Link>
-            {show && (
+            {showAccountInfo && (
                 <div className='accountInfos'>
-                    <p className="">{currentUser.firstname} {currentUser.lastname}</p>
+                    <p>{currentUser.firstname} {currentUser.lastname}</p>
                     <Link to='/userAccount' className='accountMenu'>Gérer mon compte</Link>
                     <Link to='/' className='accountMenu'>Me déconnecter</Link>
                 </div>
