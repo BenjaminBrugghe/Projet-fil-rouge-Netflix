@@ -7,9 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const ManageUsers = () => {
 
+    // la liste des utilisateurs
     const [userList, setUserList] = useState([]);
+
+    // l'utilisateur connecté
     const [currentUser, setCurrentuser] = useState({});
+
+    // affiche un message de succès après la connexion
     const [showSuccess, setShowSuccess] = useState(false);
+
     const _navigate = useNavigate();
 
     /**
@@ -25,8 +31,8 @@ const ManageUsers = () => {
     }, [currentUser]);
 
     /**
-     * Bannit un utilisateur. S'il l'était déjà, alors il sera débannit
-     * @param {*} user L'utilisateur qui correspond au bouton cliqué.
+     * Suspend le compte de l'utilisateur. S'il l'était déjà, alors il sera réactivé.
+     * @param {user} user L'utilisateur qui correspond au bouton cliqué.
      */
     function banClick(user) {
         if (user.banned == 0) {
@@ -61,12 +67,15 @@ const ManageUsers = () => {
     };
 
     /**
-     * Affiche un message pour confirmer le banissement / débanissement d'un utilisateur.
+     * Affiche un message pour confirmer la suspension du compte utilisateur ou sa réactivation.
      */
     function okSuccessClick() {
         setShowSuccess(!showSuccess);
     };
 
+    /**
+     * Retourne à la page précédente.
+     */
     function manageUsersReturnClick() {
         _navigate(-1);
     };
@@ -80,7 +89,7 @@ const ManageUsers = () => {
                     userList.map(user => {
                         return (
                             <p key={user.id} className='mappedUsers'>
-                                {user.id}- {user.lastname} {user.firstname} {user.banned == 1 ? " (Banned)" : ""}
+                                {user.id}- {user.lastname} {user.firstname} {user.banned == 1 ? " (Suspendu)" : ""}
                                 <button className='mappedUsersButton' onClick={() => banClick(user)}>Bannir</button>
                             </p>
                         )
@@ -90,7 +99,7 @@ const ManageUsers = () => {
             <button className='manageUsersReturnBtn' onClick={manageUsersReturnClick}>Retour</button>
             {showSuccess && (
                 <div className="showSuccess">
-                    <h2>L'utilisateur {currentUser.lastname} {currentUser.firstname} a été {currentUser.banned == 1 ? 'bannit' : 'débannit'}</h2>
+                    <h2>Le compte de {currentUser.lastname} {currentUser.firstname} a été {currentUser.banned == 1 ? 'suspendu avec succès !' : 'réactivé avec succès !'}</h2>
                     <button className='okBannedButton' onClick={okSuccessClick}>Ok</button>
                 </div>
             )}

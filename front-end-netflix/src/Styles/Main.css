@@ -147,7 +147,7 @@
 }
 .accountInfos .accountMenu {
   margin: 10px 0 5px 0;
-  text-decoration: none;
+  text-decoration: underline;
   color: white;
 }
 .accountInfos .accountMenu:hover {

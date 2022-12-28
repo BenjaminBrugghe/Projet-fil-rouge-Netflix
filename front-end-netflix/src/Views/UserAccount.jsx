@@ -8,20 +8,38 @@ import HeaderLogged from '../Components/HeaderLogged';
 
 const UserAccount = () => {
 
+    // Liste des utilisateurs.
+    const [userList, setUserList] = useState([]);
+
+    // Utilisateur connecté
+    const [currentUser, setCurrentuser] = useState('');
+
+    // Informations de l'utilisateur.
     const [lastname, setLastname] = useState('');
     const [firstname, setFirstname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [accountForm, setAccountForm] = useState('hiddenClass'); // accountForm
-    const [success, setSuccess] = useState('hiddenClass');
-    const [showMessage, setShowMessage] = useState('successRegister');
+    // Affiche une fenêtre de confirmation de modification.
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    // Pour vérification des Regex
+    const [lastnameRegexOK, setLastnameRegexOK] = useState(false);
+    const [firstnameRegexOK, setFirstnameRegexOK] = useState(false);
+    const [emailRegexOK, setEmailRegexOK] = useState(false);
+    const [passwordRegexOK, setPasswordRegexOK] = useState(false);
+    const [confirmPasswordRegexOK, setConfirmPassWordRegexOk] = useState(false);
+
+    // Regex pour les inputs
+    const regexName = /^[a-zA-ZÀ-ÿ\s\-]{3,}$/; // 3 caractères minimum, lettres, espaces et tirets
+    const regexEmail = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/; // Format email
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/; // 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
+
+    // Pour vérifier que l'email n'est pas déjà utilisé
+    const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(true);
 
     const _navigate = useNavigate();
-
-    const [userList, setUserList] = useState([]);
-    const [currentUser, setCurrentuser] = useState('');
 
     /**
      * Récupère la liste des utilisateurs.
@@ -35,63 +53,132 @@ const UserAccount = () => {
         getUsers();
     }, []);
 
-    function understoodClick() {
-        let currentPw = '';
-        let mask = '';
-
-        userList.forEach((el) => {
-            if (el.id == localStorage.getItem('userId')) {
-                setCurrentuser(el);
-                currentPw = el.password;
+    /**
+     * Récupère l'utilisateur connecté.
+     */
+    useEffect(() => {
+        userList.forEach((user) => {
+            if (user.id == localStorage.getItem('userId')) {
+                setCurrentuser(user);
             }
         });
-        setAccountForm('accountForm');
-        setShowMessage('hiddenClass');
+    }, [userList]);
 
-        // currentPw.forEach((el) => {
-        //     mask += "*";
-        // })
+    /**
+     * Vérifie la confirmation du mot de passe, et modifie les informations de l'utilisateur.
+     * @param {*} event Pour preventDefault().
+     */
+    function modificationClick(event) {
+        event.preventDefault();
 
-        // currentPw.map(c => {
-        //     mask += "*";
-        //     return c;
-        // })
+        // Vérification des Regex
+        checkLastnameRegex(lastname == '' ? currentUser.lastname : lastname);
+        checkFirstnameRegex(firstname == '' ? currentUser.firstname : firstname);
+        checkEmailRegex(email == '' ? currentUser.email : email);
+        checkPasswordRegex(password);
+        checkConfirmPasswordRegex(confirmPassword);
 
-        // for (let index = 1; index <= currentUser.password.length; index++) {
-        //     // const element = array[index];
-        //     mask += "*";            
-        // }
+        // Vérifie que l'addresse email n'est pas déjà utilisée
+        userList.map((user) => {
+            if (user.email == email) {
+                alert('Erreur ! Cette adresse email est déjà utilisée');
+            }
+            else {
+                setEmailAlreadyUsed(false);
+            }
+        });
 
-        console.log(`*** Mask : ${mask}`);
+        // Si l'email n'est pas déjà utilisé, vérifie que les mots de passe correspondent
+        if (emailAlreadyUsed == false) {
+            if (password != '' && password != confirmPassword) {
+                alert("Erreur ! Les deux mots de passe doivent correspondre")
+            }
+            else if (password == '' && currentUser.password != confirmPassword) {
+                alert("Erreur ! Veuillez confirmer votre mot de passe");
+            }
+            else { // Si les mots de passe correspondent, vérifie que les Regex sont OK
+                if (lastnameRegexOK && firstnameRegexOK && emailRegexOK && passwordRegexOK && confirmPasswordRegexOK) {
+                    const newUser = {
+                        id: currentUser.id,
+                        lastname: lastname ? lastname : currentUser.lastname,
+                        firstname: firstname ? firstname : currentUser.firstname,
+                        email: email ? email : currentUser.email,
+                        password: password ? password : currentUser.password,
+                        admin: currentUser.admin,
+                        banned: currentUser.banned,
+                        token: currentUser.token
+                    }
+                    editUser(newUser);
+                    alert("Informations modifiées avec succès !")
+                    resetInputs();
+                }
+            }
+        }
     };
 
-    function modificationClick(e) {
-        e.preventDefault();
-
-        if (password != '' && password != confirmPassword) {
-            alert("Erreur ! Les deux mots de passe doivent correspondre")
-        }
-        else if (password == '' && currentUser.password != confirmPassword) {
-            alert("Erreur ! Veuillez confirmer votre mot de passe");
+    /**
+    * Vérifie que le nom contient au moins 3 caractères et pas de nombres
+    */
+    const checkLastnameRegex = (lastname) => {
+        if (regexName.test(lastname)) {
+            setLastnameRegexOK(true);
         }
         else {
-            const newUser = {
-                id: currentUser.id,
-                lastname: lastname ? lastname : currentUser.lastname,
-                firstname: firstname ? firstname : currentUser.firstname,
-                email: email ? email : currentUser.email,
-                password: password ? password : currentUser.password,
-                admin: currentUser.admin,
-                banned: currentUser.banned,
-                token: currentUser.token
-            }
-            editUser(newUser);
-            resetInputs();
-            setAccountForm('hiddenClass');
-            setSuccess('successRegister');
+            alert("Erreur ! Le nom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
         }
     };
 
+    /**
+     * Vérifie que le prénom contient au moins 3 caractères et pas de nombres
+     */
+    const checkFirstnameRegex = (firstname) => {
+        if (regexName.test(firstname)) {
+            setFirstnameRegexOK(true);
+        }
+        else {
+            alert("Erreur ! Le prénom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
+        }
+    };
+
+    /**
+     * Vérifie que l'email est au bon format
+     */
+    const checkEmailRegex = (email) => {
+        if (regexEmail.test(email)) {
+            setEmailRegexOK(true);
+        }
+        else {
+            alert("Erreur ! L'adresse email n'est pas valide (Format : Example@email.com)")
+        }
+    };
+
+    /**
+     * Vérifie que le mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
+    const checkPasswordRegex = (password) => {
+        if (regexPassword.test(password)) {
+            setPasswordRegexOK(true);
+        }
+        else {
+            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
+        }
+    };
+
+    /**
+     * Vérifie que le 2ème mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
+     */
+    const checkConfirmPasswordRegex = (confirmPassword) => {
+        if (regexPassword.test(confirmPassword)) {
+            setConfirmPassWordRegexOk(true);
+        }
+        else {
+            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
+        }
+    };
+
+    /**
+     * Réinitialise les inputs.
+     */
     function resetInputs() {
         document.querySelector('#input1').value = "";
         document.querySelector('#input2').value = "";
@@ -100,36 +187,39 @@ const UserAccount = () => {
         document.querySelector('#input5').value = "";
     }
 
+    /**
+     * Retourne à la page précédente.
+     */
     function returnClick() {
         _navigate(-1);
     };
 
+    /**
+     * Referme la fenêtre de confirmation.
+     */
     function okClick() {
-        setAccountForm('accountForm');
-        setSuccess('hiddenClass');
+        setShowSuccess(!showSuccess);
     };
 
     return (
         <div className='userAccount'>
             <HeaderLogged />
-            <div className={accountForm}>
-                <p className="accountText">Modifier mes infos</p>
-                <input id='input1' type="text" className="accountInput" placeholder={currentUser.firstname} onChange={(e) => setLastname(e.target.value)} />
-                <input id='input2' type="text" className="accountInput" placeholder={currentUser.lastname} onChange={(e) => setFirstname(e.target.value)} />
-                <input id='input3' type="text" className="accountInput" placeholder={currentUser.email} onChange={(e) => setEmail(e.target.value)} />
-                <input id='input4' type="password" className="accountInput" placeholder={currentUser.password} onChange={(e) => setPassword(e.target.value)} />
-                <input id='input5' type="password" className="accountInput" placeholder='Confirmer le mot de passe' onChange={(e) => setConfirmPassword(e.target.value)} />
-                <button className='accountBtn' onClick={modificationClick}>Valider les modifications</button>
-                <button className='accountBtn' onClick={returnClick}>Retour</button>
-            </div>
-            <div className={success}>
-                <p className="successText1">Informations modifiées avec succès !</p>
-                <Link className='successLink' onClick={okClick}>Ok !</Link>
-            </div>
-            <div className={showMessage}>
-                <p className="successText2">Pour modifier vos informations, n'oubliez pas de confirmer votre mot de passe</p>
-                <Link className='successLink' onClick={understoodClick}>J'ai compris !</Link>
-            </div>
+            {currentUser &&
+                <div className="accountForm">
+                    <p className="accountText">Modifier mes infos</p>
+                    <input id='input1' type="text" className="accountInput" placeholder={currentUser.firstname} onChange={(e) => setLastname(e.target.value)} />
+                    <input id='input2' type="text" className="accountInput" placeholder={currentUser.lastname} onChange={(e) => setFirstname(e.target.value)} />
+                    <input id='input3' type="text" className="accountInput" placeholder={currentUser.email} onChange={(e) => setEmail(e.target.value)} />
+                    <input id='input4' type="password" className="accountInput" placeholder={currentUser.password} onChange={(e) => setPassword(e.target.value)} />
+                    <input id='input5' type="password" className="accountInput" placeholder='Confirmer le mot de passe' onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <button className='accountBtn' onClick={modificationClick}>Valider les modifications</button>
+                    <button className='accountBtn' onClick={returnClick}>Retour</button>
+                </div>}
+            {showSuccess &&
+                <div className="successRegister">
+                    <p className="successText1">Informations modifiées avec succès !</p>
+                    <Link className='successLink' onClick={okClick}>Ok !</Link>
+                </div>}
         </div>
     );
 };

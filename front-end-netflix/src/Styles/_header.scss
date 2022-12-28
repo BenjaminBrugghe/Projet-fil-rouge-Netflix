@@ -15,16 +15,12 @@
     }
 
     .headerLinks {
-        // display: flex;
-        // justify-content: center;
-        // align-items: center;
 
         .headerLink {
             text-decoration: none;
             color: white;
             font-size: 1.2em;
             margin-left: 25px;
-            // padding-top: -50px;
         }
     }
 
@@ -121,7 +117,7 @@
 
     .accountMenu {
         margin: 10px 0 5px 0;
-        text-decoration: none;
+        text-decoration: underline;
         color: white;
 
         &:hover{
