@@ -35,6 +35,9 @@ const Register = () => {
     const regexEmail = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/; // Format email
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/; // 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
 
+    // Pour vérifier que l'email n'est pas déjà utilisé
+    const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(true);
+
     /**
      * Récupère la liste des utilisateurs
      */
@@ -62,8 +65,6 @@ const Register = () => {
     function registerClick(event) {
         event.preventDefault();
 
-        console.log(`*****${userList}*****`); // Affiche [object Object],[object Object]
-
         // Vérification des Regex
         checkLastnameRegex(lastname);
         checkFirstnameRegex(firstname);
@@ -71,12 +72,22 @@ const Register = () => {
         checkPasswordRegex(password);
         checkConfirmPasswordRegex(confirmPassword);
 
-        // Pour vérifier si tous les champs sont remplis
-        if (lastname != '' && firstname != '' && email != '' && password != '' && confirmPassword != '') {
+        // Vérifie que l'addresse email n'est pas déjà utilisée
+        userList.map((user) => {
+            if (user.email == email) {
+                alert('Erreur ! Cette adresse email est déjà utilisée');
+            }
+            else {
+                setEmailAlreadyUsed(false);
+            }
+        });
+
+        // Si l'email n'est pas déjà utilisé, vérifie que les mots de passe correspondent
+        if (emailAlreadyUsed == false) {
             if (password != confirmPassword) {
                 alert('Erreur ! Les deux mots de passe doivent correspondre');
             }
-            else {
+            else { // Si les mots de passe correspondent, vérifie que les Regex sont OK
                 if (lastnameRegexOK && firstnameRegexOK && emailRegexOK && passwordRegexOK && confirmPasswordRegexOK) {
                     const newUser = {
                         lastname: lastname,
@@ -84,13 +95,11 @@ const Register = () => {
                         email: email,
                         password: password
                     }
+                    // Crée l'utilisateur et affiche un message de succès
                     createUser(newUser);
                     registerSuccess();
                 }
             }
-        }
-        else {
-            alert('Erreur ! Veuillez remplir tout les champs');
         }
     };
 
