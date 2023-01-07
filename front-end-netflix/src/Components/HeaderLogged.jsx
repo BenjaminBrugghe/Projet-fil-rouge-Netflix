@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllUsers } from '../Datas/ApiServices';
+import { getAllUsers } from '../Assets/ApiServices';
 import axios from 'axios';
 
 const HeaderLogged = () => {

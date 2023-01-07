@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getAllMovies, getAllDocumentaries } from '../Datas/ApiServices';
+import { getAllMovies, getAllDocumentaries } from '../Assets/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
 import Rows from '../Components/Rows';

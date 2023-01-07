@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
-import { createUser, getAllUsers } from '../Datas/ApiServices';
+import { getAllUsers, createUser } from '../Assets/ApiServices';
 import RegisterPopUp from '../Components/RegisterPopUp';
+import { checkLastnameRegex, checkFirstnameRegex, checkEmailRegex, checkPasswordRegex, checkConfirmPasswordRegex } from '../Assets/Regex';
 
 const Register = () => {
 
@@ -30,11 +30,6 @@ const Register = () => {
     const [passwordRegexOK, setPasswordRegexOK] = useState(false);
     const [confirmPasswordRegexOK, setConfirmPassWordRegexOk] = useState(false);
 
-    // Regex pour les inputs
-    const regexName = /^[a-zA-ZÀ-ÿ\s\-]{3,}$/; // 3 caractères minimum, lettres, espaces et tirets
-    const regexEmail = /^[a-zA-Z0-9.!#$%&’*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/; // Format email
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/; // 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial
-
     // Pour vérifier que l'email n'est pas déjà utilisé
     const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(true);
 
@@ -42,12 +37,8 @@ const Register = () => {
      * Récupère la liste des utilisateurs
      */
     useEffect(() => {
-        async function getUsers() {
-            const response = await axios.get(getAllUsers.getUsers);
-            const data = await response.data;
-            setUserList(data);
-        };
-        getUsers();
+        setUserList(getAllUsers());
+        console.table(userList);
     }, []);
 
     /**
@@ -66,19 +57,19 @@ const Register = () => {
         event.preventDefault();
 
         // Vérification des Regex
-        checkLastnameRegex(lastname);
-        checkFirstnameRegex(firstname);
-        checkEmailRegex(email);
-        checkPasswordRegex(password);
-        checkConfirmPasswordRegex(confirmPassword);
+        setLastnameRegexOK(checkLastnameRegex(lastname));
+        setFirstnameRegexOK(checkFirstnameRegex(firstname));
+        setEmailRegexOK(checkEmailRegex(email));
+        setPasswordRegexOK(checkPasswordRegex(password));
+        setConfirmPassWordRegexOk(checkConfirmPasswordRegex(confirmPassword));
 
         // Vérifie que l'addresse email n'est pas déjà utilisée
         userList.map((user) => {
             if (user.email == email) {
-                alert('Erreur ! Cette adresse email est déjà utilisée');
+                return alert('Erreur ! Cette adresse email est déjà utilisée');
             }
             else {
-                setEmailAlreadyUsed(false);
+                return setEmailAlreadyUsed(false);
             }
         });
 
@@ -99,69 +90,32 @@ const Register = () => {
                     createUser(newUser);
                     registerSuccess();
                 }
+                else {
+                    switch (false) {
+                        case lastnameRegexOK:
+                            alert('Erreur ! Le nom doit contenir au moins 3 caractères');
+                            break;
+                        case firstnameRegexOK:
+                            alert('Erreur ! Le prénom doit contenir au moins 3 caractères');
+                            break;
+                        case emailRegexOK:
+                            alert("Erreur ! L'adresse email n'est pas valide (Format : Example@email.com)");
+                            break;
+                        case passwordRegexOK:
+                            alert('Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial');
+                            break;
+                        case confirmPasswordRegexOK:
+                            alert('Erreur ! Les deux mots de passe doivent correspondre');
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
         }
     };
 
-    /**
-     * Vérifie que le nom contient au moins 3 caractères et pas de nombres
-     */
-    const checkLastnameRegex = (lastname) => {
-        if (regexName.test(lastname)) {
-            setLastnameRegexOK(true);
-        }
-        else {
-            alert("Erreur ! Le nom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
-        }
-    };
 
-    /**
-     * Vérifie que le prénom contient au moins 3 caractères et pas de nombres
-     */
-    const checkFirstnameRegex = (firstname) => {
-        if (regexName.test(firstname)) {
-            setFirstnameRegexOK(true);
-        }
-        else {
-            alert("Erreur ! Le prénom doit contenir au moins 3 caractères et ne doit pas contenir de chiffres")
-        }
-    };
-
-    /**
-     * Vérifie que l'email est au bon format
-     */
-    const checkEmailRegex = (email) => {
-        if (regexEmail.test(email)) {
-            setEmailRegexOK(true);
-        }
-        else {
-            alert("Erreur ! L'adresse email n'est pas valide (Format : Example@email.com)")
-        }
-    };
-
-    /**
-     * Vérifie que le mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
-     */
-    const checkPasswordRegex = (password) => {
-        if (regexPassword.test(password)) {
-            setPasswordRegexOK(true);
-        }
-        else {
-            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
-        }
-    };
-
-    /**
-     * Vérifie que le 2ème mot de passe contient au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial
-     */
-    const checkConfirmPasswordRegex = (confirmPassword) => {
-        if (regexPassword.test(confirmPassword)) {
-            setConfirmPassWordRegexOk(true);
-        }
-        else {
-            alert("Erreur ! Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial")
-        }
-    };
 
     return (
         <div className='register'>

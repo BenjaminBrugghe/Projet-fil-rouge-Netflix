@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { editUser, getAllUsers } from '../Datas/ApiServices';
+import { editUser, getAllUsers } from '../Assets/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
 import { useNavigate } from 'react-router-dom';

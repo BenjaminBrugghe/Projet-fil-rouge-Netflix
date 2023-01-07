@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
-import { getAllUsers } from '../Datas/ApiServices';
+import { getAllUsers } from '../Assets/ApiServices';
 
 const Login = () => {
 
@@ -21,12 +21,9 @@ const Login = () => {
      */
     useEffect(() => {
         async function getUsers() {
-            const response = await fetch(getAllUsers.getUsers);
-            const data = await response.json();
-            setUserList(data);
-        }
+            setUserList(getAllUsers());
+        };
         getUsers();
-
     }, []);
 
     /**
