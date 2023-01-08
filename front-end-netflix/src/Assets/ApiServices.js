@@ -1,44 +1,51 @@
 import axios from "axios";
-const _URL = 'http://localhost:5290/api';
+// import "dotenv/config";
 
-// ********** USERS **********
+// const Url_Users = `${process.env.JSONSERVER}/Users`;
+const Url_Users = "http://localhost:3001/Users";
 
-export const getAllUsers = async () => {
-    const response = await axios.get(`${_URL}/Users`);
-    const data = await response.data;
-    return data;
-};
+export default class Service {
 
-export const createUser = async (user) => {
-    const response = await axios.post(`${_URL}/Users`, {
-        lastname: user.lastname,
-        firstname: user.firstname,
-        email: user.email,
-        password: user.password,
-    });
-    const data = await response.data;
-    return data;
-};
+    // ********** USERS **********
 
-export const editUser = async (user) => {
-    const response = await axios.put(`${_URL}/Users/${user.id}`, {
-        lastname: user.lastname,
-        firstname: user.firstname,
-        email: user.email,
-        password: user.password,
-    });
-    const data = await response.data;
-    return data;
-};
+    /**
+     * Récupère la liste des utilisateurs
+     * @returns {Promise<*>} La liste des utilisateurs
+     */
+    getAllUsers = async () => {
+        const response = await axios.get(Url_Users);
+        const data = await response.data;
+        return data;
+    };
 
-// ********** MOVIES **********
+    /**
+     * Récupère un utilisateur via son email
+     * @param {string} email L'email de l'utilisateur qu'on recherche
+     * @returns {Promise<*>} L'utilisateur correspondant à l'email
+     */
+    getUserByEmail = async (email) => {
+        const response = await this.getAllUsers();
+        const user = response.find(user => user.email == email);
+        return user;
+    };
 
-export const getAllMovies = {
-    getMovies: `${_URL}/Movies`
-};
+    /**
+     * Crée un nouvel utilisateur
+     * @param {User} newUser L'utilisateur à créer
+     * @returns {Promise<*>} Le nouvel utilisateur créé
+     */
+    createNewUser = async (newUser) => {
+        const response = await axios.post(Url_Users, newUser);
+        const data = await response.data;
+        return data;
+    };
 
-// ********** DOCUMENTARIES **********
 
-export const getAllDocumentaries = {
-    getDocumentaries: `${_URL}/Documentaries`
-};
+    // Create user
+
+    // Get token for login
+
+    // ********** MOVIES **********
+    // ********** SERIES **********
+    // ********** DOCUMENTARIES **********
+}
