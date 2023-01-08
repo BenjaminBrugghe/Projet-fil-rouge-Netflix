@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { getAllMovies, getAllDocumentaries } from '../Assets/ApiServices';
+// import { getAllMovies, getAllDocumentaries } from '../service/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
 import Rows from '../Components/Rows';
@@ -14,26 +14,7 @@ const Feed = () => {
     /**
      * Récupère la liste des films (movieList).
      */
-    useEffect(() => {
-        async function getMovies() {
-            const response = await fetch(getAllMovies.getMovies);
-            const data = await response.json();
-            setMovieList(data);
-        }
-        getMovies();
-    }, []);
 
-    /**
-     * Récupère la liste des documentaires (documentaryList).
-     */
-    useEffect(() => {
-        async function getDocumentaries() {
-            const response = await fetch(getAllDocumentaries.getDocumentaries);
-            const data = await response.json();
-            setDocumentaryList(data);
-        }
-        getDocumentaries();
-    }, []);
 
 
     // Génère un nombre aléatoire pour afficher une vidéo dans le lecteur.

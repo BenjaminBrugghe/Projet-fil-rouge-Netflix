@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { editUser, getAllUsers } from '../Assets/ApiServices';
+// import { editUser, getAllUsers } from '../service/ApiServices';
 import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
 import { useNavigate } from 'react-router-dom';
@@ -21,14 +21,7 @@ const ManageUsers = () => {
     /**
      * Récupère la liste des utilisateurs.
      */
-    useEffect(() => {
-        async function getUsers() {
-            const response = await axios.get(getAllUsers.getUsers);
-            const data = await response.data;
-            setUserList(data);
-        };
-        getUsers();
-    }, [currentUser]);
+
 
     /**
      * Suspend le compte de l'utilisateur. S'il l'était déjà, alors il sera réactivé.
@@ -46,7 +39,7 @@ const ManageUsers = () => {
                 banned: 1, // banned: user.banned == 0 ? 1 : 0,  => Ne fonctionne pas, pourquoi ?
                 token: user.token
             }
-            editUser(newUser);
+            // editUser(newUser);
             setCurrentuser(newUser);
             setShowSuccess(!showSuccess);
         } else if (user.banned == 1) {
@@ -60,7 +53,7 @@ const ManageUsers = () => {
                 banned: 0,
                 token: user.token
             }
-            editUser(newUser);
+            // editUser(newUser);
             setCurrentuser(newUser);
             setShowSuccess(!showSuccess);
         }

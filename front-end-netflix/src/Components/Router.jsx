@@ -7,8 +7,11 @@ import Register from '../Views/Register';
 import Feed from '../Views/Feed';
 import UserAccount from '../Views/UserAccount';
 import ManageUsers from '../Views/ManageUsers';
+import Unauthorize from '../Views/Unauthorize';
+
 
 const Router = () => {
+
     return (
         <BrowserRouter>
             <Routes>
@@ -16,8 +19,7 @@ const Router = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/feed' element={<Feed />} />
-                <Route path='/userAccount' element={<UserAccount />} />
-                <Route path='/manageUsers' element={<ManageUsers />} />
+                {/* <Route path='/feed' element={token != null ? <Feed /> : <Unauthorize />} /> */}
                 <Route path='/*' element={<Error404 />} />
             </Routes>
         </BrowserRouter>

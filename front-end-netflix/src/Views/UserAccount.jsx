@@ -2,9 +2,11 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getAllUsers, editUser } from '../Assets/ApiServices';
+// import { getAllUsers, editUser } from '../service/ApiServices';
 import HeaderLogged from '../Components/HeaderLogged';
-import { checkLastnameRegex, checkFirstnameRegex, checkEmailRegex, checkPasswordRegex, checkConfirmPasswordRegex } from '../Assets/Regex';
+import Regex from '../Assets/Regex';
+
+const regex = new Regex();
 
 
 const UserAccount = () => {
@@ -42,9 +44,9 @@ const UserAccount = () => {
      */
     useEffect(() => {
         async function getUsers() {
-            setUserList(getAllUsers());
+            // setUserList(getAllUsers());
         };
-        getUsers();
+        // getUsers();
     }, []);
 
     /**
@@ -66,11 +68,11 @@ const UserAccount = () => {
         event.preventDefault();
 
         // Vérification des Regex
-        setLastnameRegexOK(checkLastnameRegex(lastname == '' ? currentUser.lastname : lastname));
-        setFirstnameRegexOK(checkFirstnameRegex(firstname == '' ? currentUser.firstname : firstname));
-        setEmailRegexOK(checkEmailRegex(email == '' ? currentUser.email : email));
-        setPasswordRegexOK(checkPasswordRegex(password));
-        setConfirmPassWordRegexOk(checkConfirmPasswordRegex(confirmPassword));
+        setLastnameRegexOK(regex.checkLastnameRegex(lastname == '' ? currentUser.lastname : lastname));
+        setFirstnameRegexOK(regex.checkFirstnameRegex(firstname == '' ? currentUser.firstname : firstname));
+        setEmailRegexOK(regex.checkEmailRegex(email == '' ? currentUser.email : email));
+        setPasswordRegexOK(regex.checkPasswordRegex(password));
+        setConfirmPassWordRegexOk(regex.checkConfirmPasswordRegex(confirmPassword));
 
         // Vérifie que l'addresse email n'est pas déjà utilisée
         userList.map((user) => {
@@ -102,7 +104,7 @@ const UserAccount = () => {
                         banned: currentUser.banned,
                         token: currentUser.token
                     }
-                    editUser(newUser);
+                    // editUser(newUser);
                     alert("Informations modifiées avec succès !")
                     resetInputs();
                 }

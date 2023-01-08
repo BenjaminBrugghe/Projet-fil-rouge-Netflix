@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
-import { getAllUsers } from '../Assets/ApiServices';
+// import { getAllUsers } from '../service/ApiServices';
 
 const Login = () => {
 
@@ -21,7 +21,7 @@ const Login = () => {
      */
     useEffect(() => {
         async function getUsers() {
-            setUserList(getAllUsers());
+            // setUserList(getAllUsers());
         };
         getUsers();
     }, []);
@@ -35,30 +35,32 @@ const Login = () => {
         let currentUser = null;
 
         // Récupère les informations de l'utilisateur connecté
-        userList.forEach((user) => {
-            if (email == user.email && password == user.password && !found) {
-                currentUser = user;
-                found = true;
-            }
-        });
+        // userList.forEach((user) => {
+        //     if (email == user.email && password == user.password && !found) {
+        //         currentUser = user;
+        //         found = true;
+        //     }
+        // });
 
-        // Vérifie si l'utilisateur a été bannit et affiche un message d'erreur si c'est le cas.
-        if (found) {
-            if (currentUser.banned == 1) {
-                alert('Erreur ! Votre compte a été suspendu !');
-            }
-            else {
-                // Stockage des informations pour les récupèrer dans le <HeaderLogged> de /feed
-                // L'id pour afficher les infos de l'utilisateur
-                // Le user.admin pour afficher ou non les options Admin dans le header 
-                localStorage.setItem('userId', currentUser.id);
-                localStorage.setItem('userAdmin', currentUser.admin);
-                _navigate('/feed');
-            }
-        }
-        else {
-            alert('Erreur ! E-mail ou mot de passe incorrect !');
-        }
+        // // Vérifie si l'utilisateur a été bannit et affiche un message d'erreur si c'est le cas.
+        // if (found) {
+        //     if (currentUser.banned == 1) {
+        //         alert('Erreur ! Votre compte a été suspendu !');
+        //     }
+        //     else {
+        //         // Stockage des informations pour les récupèrer dans le <HeaderLogged> de /feed
+        //         // L'id pour afficher les infos de l'utilisateur
+        //         // Le user.admin pour afficher ou non les options Admin dans le header 
+        //         localStorage.setItem('userId', currentUser.id);
+        //         localStorage.setItem('userAdmin', currentUser.admin);
+        //     }
+        // }
+        // else {
+        //     alert('Erreur ! E-mail ou mot de passe incorrect !');
+        // }
+        localStorage.setItem("token", "token");
+        _navigate('/feed');
+        console.log("token : " + localStorage.getItem('token'));
     };
 
     return (

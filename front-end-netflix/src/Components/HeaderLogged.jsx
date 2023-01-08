@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllUsers } from '../Assets/ApiServices';
+// import { getAllUsers } from '../service/ApiServices';
 import axios from 'axios';
 
 const HeaderLogged = () => {
@@ -24,9 +24,9 @@ const HeaderLogged = () => {
      */
     useEffect(() => {
         async function getUsers() {
-            const response = await axios.get(getAllUsers.getUsers);
-            const data = await response.data;
-            setUserList(data);
+            // const response = await axios.get(getAllUsers.getUsers);
+            // const data = await response.data;
+            // setUserList(data);
         };
         getUsers();
 
