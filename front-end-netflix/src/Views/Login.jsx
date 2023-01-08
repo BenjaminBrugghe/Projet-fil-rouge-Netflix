@@ -3,64 +3,40 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
-// import { getAllUsers } from '../service/ApiServices';
+import Service from '../Assets/ApiServices';
 
 const Login = () => {
-
-    // Liste des utilisateurs
-    const [userList, setUserList] = useState([]);
 
     // Pour récupérer les informations de l'utilisateur
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const _navigate = useNavigate();
+    const _service = new Service();
 
-    /**
-     * Récupère la liste des utilisateurs.
-     */
-    useEffect(() => {
-        async function getUsers() {
-            // setUserList(getAllUsers());
-        };
-        getUsers();
-    }, []);
+    const _navigate = useNavigate();
 
     /**
      * Vérifie les informations afin de connecter l'utilisateur et le renvoyer vers /feed.
      * Affiche une fenêtre avec un message en cas d'erreur.
      */
-    function loginCLick() {
+    async function loginCLick() {
         let found = false;
         let currentUser = null;
 
-        // Récupère les informations de l'utilisateur connecté
-        // userList.forEach((user) => {
-        //     if (email == user.email && password == user.password && !found) {
-        //         currentUser = user;
-        //         found = true;
-        //     }
-        // });
+        const user = {
+            email: email,
+            password: password
+        }
 
-        // // Vérifie si l'utilisateur a été bannit et affiche un message d'erreur si c'est le cas.
-        // if (found) {
-        //     if (currentUser.banned == 1) {
-        //         alert('Erreur ! Votre compte a été suspendu !');
-        //     }
-        //     else {
-        //         // Stockage des informations pour les récupèrer dans le <HeaderLogged> de /feed
-        //         // L'id pour afficher les infos de l'utilisateur
-        //         // Le user.admin pour afficher ou non les options Admin dans le header 
-        //         localStorage.setItem('userId', currentUser.id);
-        //         localStorage.setItem('userAdmin', currentUser.admin);
-        //     }
-        // }
-        // else {
-        //     alert('Erreur ! E-mail ou mot de passe incorrect !');
-        // }
-        localStorage.setItem("token", "token");
-        _navigate('/feed');
-        console.log("token : " + localStorage.getItem('token'));
+        // J'envois les informations pour vérifications
+        const newToken = await _service.createToken(user);
+
+        console.log("newToken : " + newToken);
+
+        // Si le token est valide, je le stocke dans le localStorage et je redirige vers /feed
+        localStorage.setItem("token", newToken);
+        // _navigate('/feed');
+        console.log("LocalStorage : " + localStorage.getItem('token'));
     };
 
     return (

@@ -7,6 +7,8 @@ const Url_Users = "http://localhost:3001/Users";
 export default class Service {
 
     // ********** USERS **********
+    // pour installer json web token
+    // npm install jsonwebtoken
 
     /**
      * Récupère la liste des utilisateurs
@@ -40,10 +42,13 @@ export default class Service {
         return data;
     };
 
+    createToken = async (user) => {
+        const response = await axios.post(Url_Users + "/token", user);
+        const data = await response.data;
+        console.log("data", data);
+        return data;
+    };
 
-    // Create user
-
-    // Get token for login
 
     // ********** MOVIES **********
     // ********** SERIES **********
