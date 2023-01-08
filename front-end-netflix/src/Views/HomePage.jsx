@@ -4,8 +4,7 @@ import Header from '../Components/Header';
 
 const HomePage = () => {
 
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userAdmin');
+    // localStorage.removeItem('token');
 
     return (
         <div className='homePage'>

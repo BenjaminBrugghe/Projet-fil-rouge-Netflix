@@ -7,8 +7,6 @@ const Url_Users = "http://localhost:3001/Users";
 export default class Service {
 
     // ********** USERS **********
-    // pour installer json web token
-    // npm install jsonwebtoken
 
     /**
      * Récupère la liste des utilisateurs
@@ -42,10 +40,28 @@ export default class Service {
         return data;
     };
 
+    /**
+     * Crée un token pour l'utilisateur connecté
+     * @param {User} user 
+     * @returns {Promise<*>} Le token de l'utilisateur
+     */
     createToken = async (user) => {
         const response = await axios.post(Url_Users + "/token", user);
         const data = await response.data;
-        console.log("data", data);
+        return data;
+    };
+
+    verifyToken = async (token) => {
+        console.log("token.userToken : ", token.userToken); // Le token est bon ici
+        const response = await axios.get(Url_Users + "/verifyToken", {
+            headers: {
+                'Authorization': `${token.userToken}`
+            }
+        }, token);
+
+        console.log("response : ", response); // Status 200 (OK)
+        const data = await response.data;
+        console.log("data : ", data); // Invalid token
         return data;
     };
 

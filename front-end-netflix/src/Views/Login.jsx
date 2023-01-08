@@ -20,9 +20,7 @@ const Login = () => {
      * Affiche une fenêtre avec un message en cas d'erreur.
      */
     async function loginCLick() {
-        let found = false;
-        let currentUser = null;
-
+        // Création d'un objet avec les informations pour le token
         const user = {
             email: email,
             password: password
@@ -31,12 +29,9 @@ const Login = () => {
         // J'envois les informations pour vérifications
         const newToken = await _service.createToken(user);
 
-        console.log("newToken : " + newToken);
-
         // Si le token est valide, je le stocke dans le localStorage et je redirige vers /feed
         localStorage.setItem("token", newToken);
-        // _navigate('/feed');
-        console.log("LocalStorage : " + localStorage.getItem('token'));
+        _navigate('/feed');
     };
 
     return (

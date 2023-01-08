@@ -12,6 +12,7 @@ const router = express.Router();
 
 // Routes
 router.get("/Users", controller.getAllUsers);
+router.get("/Users/verifyToken", controller.verifyToken);
 router.get("/Users/:id", controller.getUserById);
 router.get("/Users/login/:email", controller.getUserByEmail);
 router.post("/Users", controller.createUser);

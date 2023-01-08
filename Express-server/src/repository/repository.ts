@@ -59,6 +59,11 @@ export default class Repository {
     return newToken;
   };
 
+  public verifyToken = (token: string): User => {
+    const user = jwt.verify(token, jwt_secret);
+    return user;
+  };
+
   /**
    * Crée un nouvel utilisateur
    * @param newUser L'utilisateur à créer

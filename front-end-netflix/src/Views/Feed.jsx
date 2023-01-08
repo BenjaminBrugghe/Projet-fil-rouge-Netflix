@@ -1,9 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import { getAllMovies, getAllDocumentaries } from '../service/ApiServices';
-import axios from 'axios';
 import HeaderLogged from '../Components/HeaderLogged';
 import Rows from '../Components/Rows';
+import Service from '../Assets/ApiServices';
 
 const Feed = () => {
 
@@ -11,11 +10,23 @@ const Feed = () => {
     const [documentaryList, setDocumentaryList] = useState([]);
     const [currentVideo, setCurrentVideo] = useState('');
 
-    /**
-     * Récupère la liste des films (movieList).
-     */
+    const _service = new Service();
+    const [userLogged, setUserLogged] = useState({});
 
+    useEffect(() => {
+        async function getUser() {
+            const token = localStorage.getItem("token");
+            const tokenTmp = {
+                userToken: token
+            }
+            const user = await _service.verifyToken(tokenTmp);
+            setUserLogged(user);
+        }
+        getUser();
+        // console.log("UseEffect-userLogged : " + userLogged);
+    }, []);
 
+    // console.log(`userLogged : "${userLogged}"`);
 
     // Génère un nombre aléatoire pour afficher une vidéo dans le lecteur.
     function randomize(min, max) {
@@ -43,9 +54,11 @@ const Feed = () => {
                     }
                 })
             )}
-            <Rows mediaList={movieList} rowTitle="Movies" />
-            <Rows mediaList={documentaryList} rowTitle="Documentaries" />
-            <Rows mediaList={movieList} rowTitle="" />
+            {userLogged &&
+                <Rows mediaList={movieList} rowTitle={userLogged.lastname} />
+            }
+            <Rows mediaList={documentaryList} rowTitle="Series" />
+            <Rows mediaList={movieList} rowTitle="Documentaries" />
         </div>
     );
 };

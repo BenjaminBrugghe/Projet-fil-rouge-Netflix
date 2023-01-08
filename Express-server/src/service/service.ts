@@ -83,6 +83,12 @@ export default class Service {
     return newToken;
   };
 
+  public verifyToken = async (token: string): Promise<User> => {
+    const userFound = this.repo.verifyToken(token);
+    if (!userFound) throw "Erreur, token invalide.";
+    return userFound;
+  };
+
   /**
    * Appelle la méthode createUser du repository
    * @param lastname Le nom de l'utilisateur à créer
