@@ -60,6 +60,12 @@ export default class Service {
     return result;
   };
 
+  /**
+   * Vérifie si les informations de connexion sont correctes et appelle la méthode createToken du repository
+   * @param email L'email saisi par l'utilisateur
+   * @param password Le mot de passe saisi par l'utilisateur
+   * @returns Le token de l'utilisateur
+   */
   public createToken = async (
     email: string,
     password: string

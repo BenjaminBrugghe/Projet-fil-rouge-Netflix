@@ -35,6 +35,9 @@ export default class Controller {
     res.send(this.service.getUserByEmail(email));
   };
 
+  /**
+   * Récupère les informations de la requête et appelle la méthode createToken du service
+   */
   public createToken = async (req: Request, res: Response): Promise<void> => {
     const email = req.body.email;
     const password = req.body.password;

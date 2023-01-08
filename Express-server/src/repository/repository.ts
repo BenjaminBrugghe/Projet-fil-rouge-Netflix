@@ -48,10 +48,14 @@ export default class Repository {
     return userFound;
   };
 
+  /**
+   * Stocke les informations de l'utilisateur actuel dans le token
+   * @param userLogged L'utilisateur connecté
+   * @returns Le token de l'utilisateur
+   */
   public createToken = (userLogged: User): string => {
     const payload: User = userLogged;
     const newToken = jwt.sign(payload, jwt_secret);
-    console.log("Token créé: " + newToken);
     return newToken;
   };
 
