@@ -60,6 +60,23 @@ export default class Service {
     return result;
   };
 
+  public createToken = async (
+    email: string,
+    password: string
+  ): Promise<string> => {
+    // Je récupère l'utilisateur correspondant à l'email
+    const userFound = await this.getUserByEmail(email);
+
+    // Si l'utilisateur n'existe pas
+    if (!userFound) throw "Erreur, email incorrect.";
+
+    // Si les 2 mots de passe ne correspondent pas
+    if (userFound.password != password) throw "Erreur, mot de passe incorrect.";
+
+    const newToken = this.repo.createToken(userFound);
+    return newToken;
+  };
+
   /**
    * Appelle la méthode createUser du repository
    * @param lastname Le nom de l'utilisateur à créer

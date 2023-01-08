@@ -1,4 +1,8 @@
 import User from "../models/users";
+import "dotenv/config";
+
+const jwt = require("jsonwebtoken");
+const jwt_secret = process.env.JWT_SECRET;
 
 // Pour la persistance des données en JSON
 const { readFileSync, writeFileSync } = require("fs");
@@ -42,6 +46,13 @@ export default class Repository {
   public getUserByEmail = (email: string): User => {
     const userFound = this.userList.find((user) => user.email == email)!;
     return userFound;
+  };
+
+  public createToken = (userLogged: User): string => {
+    const payload: User = userLogged;
+    const newToken = jwt.sign(payload, jwt_secret);
+    console.log("Token créé: " + newToken);
+    return newToken;
   };
 
   /**
