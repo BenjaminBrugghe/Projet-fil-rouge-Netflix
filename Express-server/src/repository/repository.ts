@@ -55,7 +55,7 @@ export default class Repository {
    */
   public createToken = (userLogged: User): string => {
     const payload: User = userLogged;
-    const newToken = jwt.sign(payload, jwt_secret);
+    const newToken = jwt.sign(payload, jwt_secret, { expiresIn: "1h" });
     return newToken;
   };
 

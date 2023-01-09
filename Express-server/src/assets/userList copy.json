@@ -21,8 +21,8 @@
     "id": 3,
     "lastname": "Admin_Lastname",
     "firstname": "Admin_Firstname",
-    "email": "Admin",
-    "password": "Admin",
+    "email": "admin",
+    "password": "admin",
     "admin": true,
     "banned": false
   },
