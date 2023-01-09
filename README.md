@@ -1,36 +1,59 @@
-# Projet-fil-rouge-Netflix
+# Clone Netflix
 
-### Ceci est le projet fil rouge réalisé lors de ma formation .Net Fullstack chez M2i Formation.
+# Description :
 
-### Prévu pour un groupe de 3 personnes, les circonstances ont voulues que je le fasse seul. Le cahier des charges est présent dans le dossier.
+### Ceci est le projet fil rouge réalisé lors de ma formation '.Net Fullstack' chez M2i Formation. Il s'agit d'un mini-clone de Netflix qui regroupe les langages et outils suivants :
 
-### Il regroupe les langages et technologies suivantes :
+- Html
+- CSS (Sass)
+- JavaScript(.jsx)
+- ReactJs
+- NodeJS
 
-### Html, CSS (Sass), JavaScript, ReactJs, NodeJS, C#, SQL, Asp.net Core
-
-#
-
-## Dépendances :
-
-- Node
+### Le back-end est un serveur Express en Typescript, avec une persistance de données en Json.
 
 #
 
-## Lancer le projet :
+### Il permet à l'utilisateurs de :
 
-- Clôner le repos
+- S'enregistrer sur le site.
+- Se connecter pour accéder au contenu (avec authentification par Json web token)
+- Consulter des vidéos triées par catégories (films, series, ...) et par genre.
+- Lire des vidéos.
+- Accéder à son profil afin de modifier ses informations.
+
+### Il permet aussi aux administrateurs de :
+
+- Gérer les vidéos (ajout, modification, suppression).
+- Suspendre ou rétablir le compte d'un utilisateur.
+
+#
+
+# Lancer le projet :
 
 ## Back-end :
 
-- Ouvrir le fichier "Back-end-netflix.sln" dans Visual Studio
-- Créer les tables SQL à partir des fichiers "script.sql" du dossier "SQL"
-- Au besoin, modifier la chaine de connection dans le fichier "back-end-netflix/Tools/Connection.cs"
-- Démarrer le projet
+### Depuis le dossier "Express-server" :
+
+- Créer un fichier '.env' et y renseigner les informations nécessaires (voir '.env.example')
+- Installer les dépendances :
+
+```
+npm install
+```
+
+- Démarrer le serveur :
+
+```
+npm run start
+```
+
+#
 
 ## Front-end :
 
-- Ouvrir le dossier "front-end-netflix" dans Visual Studio Code
-- Installer les dépendances
+- Depuis le dossier "front-end-netflix"
+- Installer les dépendances :
 
 ```
 npm install
@@ -41,4 +64,3 @@ npm install
 ```
 npm start
 ```
-
