@@ -37,7 +37,7 @@
 .error404 .errorText {
   font-size: 3em;
 }
-.error404 .errorButton {
+.error404 .errorButton, .error404 .unauthButtons .goToLoginButton {
   background-color: #e50914;
   color: white;
   border: none;
@@ -127,6 +127,7 @@
 .header .headerAccountBtn {
   background-color: #333333;
   font-weight: normal;
+  cursor: pointer;
 }
 
 .accountInfos {
@@ -560,4 +561,22 @@
   background-color: rgb(78, 78, 78);
   border-radius: 9px;
   border: 3px solid transparent;
+}
+
+.error404 {
+  height: 51.6vh;
+}
+.error404 .loginText {
+  font-size: 2em;
+}
+.error404 .unauthButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error404 .unauthButtons .errorButton, .error404 .unauthButtons .goToLoginButton {
+  margin: 20px 20px 0 20px;
+}
+.error404 .unauthButtons .goToLoginButton {
+  width: 130px;
 }/*# sourceMappingURL=Main.css.map */

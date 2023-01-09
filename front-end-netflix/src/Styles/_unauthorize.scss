@@ -1,0 +1,23 @@
+.error404 {
+  @extend .homePage;
+  height: 51.6vh;
+
+  .loginText {
+    font-size: 2em;
+  }
+
+  .unauthButtons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .errorButton {
+      margin: 20px 20px 0 20px;
+    }
+
+    .goToLoginButton {
+      @extend .errorButton;
+      width: 130px;
+    }
+  }
+}

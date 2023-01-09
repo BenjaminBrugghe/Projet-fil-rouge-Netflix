@@ -1,135 +1,134 @@
 .header {
-    background: linear-gradient(black, transparent);
-    height: 10vh;
-    position: relative;
+  background: linear-gradient(black, transparent);
+  height: 10vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .headerLogo {
+    background: url(../../public/images/logo-netflix2.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 10vw;
+    margin-left: 2vw;
+  }
+
+  .headerLinks {
+    .headerLink {
+      text-decoration: none;
+      color: white;
+      font-size: 1.2em;
+      margin-left: 25px;
+    }
+  }
+
+  .headerIcons {
+    background-color: transparent;
+    height: 40px;
+    width: 150px;
+    position: absolute;
+    right: 10%;
     display: flex;
+    justify-content: center;
     align-items: center;
 
-    .headerLogo {
-        background: url(../../public/images/logo-netflix2.png);
-        background-size: cover;
-        background-repeat: no-repeat;
-        height: 100%;
-        width: 10vw;
-        margin-left: 2vw;
+    .headerUserIcon {
+      color: white;
+      font-size: 2em;
+      height: 40px;
+      width: 40px;
+      margin: 0 40px 0 0;
     }
 
-    .headerLinks {
-
-        .headerLink {
-            text-decoration: none;
-            color: white;
-            font-size: 1.2em;
-            margin-left: 25px;
-        }
+    .headerUserIcon::after {
+      content: "Gerer les utilisateurs";
+      position: absolute;
+      top: 120%;
+      right: 40%;
+      font-size: 0.5em;
+      z-index: -1;
     }
 
-    .headerIcons {
-        background-color: transparent;
-        height: 40px;
-        width: 150px;
-        position: absolute;
-        right: 10%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .headerUserIcon {
-            color: white;
-            font-size: 2em;
-            height: 40px;
-            width: 40px;
-            margin: 0 40px 0 0;
-        }
-
-        .headerUserIcon::after {
-            content: 'Gerer les utilisateurs';
-            position: absolute;
-            top: 120%;
-            right: 40%;
-            font-size: 0.5em;
-            z-index: -1;
-        }
-
-        .headerUserIcon:hover::after {
-            z-index: 2;
-        }
-
-        .headerMovieIcon {
-            @extend .headerUserIcon;
-
-        }
-
-        .headerMovieIcon::after {
-            content: 'Gerer les videos';
-            position: absolute;
-            top: 120%;
-            right: -20%;
-            font-size: 0.5em;
-            z-index: -1;
-        }
-
-        .headerMovieIcon:hover::after {
-            z-index: 2;
-        }
+    .headerUserIcon:hover::after {
+      z-index: 2;
     }
 
-    .headerLoginBtn {
-        background-color: #e50914;
-        color: white;
-        border: none;
-        border-radius: 7px;
-        height: 38px;
-        width: 120px;
-        font-size: 1.1em;
-        font-weight: bold;
-        text-decoration: none;
-        position: absolute;
-        right: 3%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .headerMovieIcon {
+      @extend .headerUserIcon;
     }
 
-    .headerAccountBtn {
-        @extend .headerLoginBtn;
-        background-color: #333333;
-        font-weight: normal;
+    .headerMovieIcon::after {
+      content: "Gerer les videos";
+      position: absolute;
+      top: 120%;
+      right: -20%;
+      font-size: 0.5em;
+      z-index: -1;
     }
+
+    .headerMovieIcon:hover::after {
+      z-index: 2;
+    }
+  }
+
+  .headerLoginBtn {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    height: 38px;
+    width: 120px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+    position: absolute;
+    right: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .headerAccountBtn {
+    @extend .headerLoginBtn;
+    background-color: #333333;
+    font-weight: normal;
+    cursor: pointer;
+  }
 }
 
 .accountInfos {
-    background-color: #333333;
+  background-color: #333333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  position: absolute;
+  right: 3%;
+  top: 70%;
+  height: 160px;
+  width: 250px;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .accountMenu {
+    margin: 10px 0 5px 0;
+    text-decoration: underline;
     color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1.2em;
-    position: absolute;
-    right: 3%;
-    top: 70%;
-    height: 160px;
-    width: 250px;
-    z-index: 2;
 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-
-    .accountMenu {
-        margin: 10px 0 5px 0;
-        text-decoration: underline;
-        color: white;
-
-        &:hover{
-            cursor: pointer;
-            text-decoration: underline;
-        }
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
     }
+  }
 }
 
 .hiddenClass {
-    z-index: -10;
-    position: absolute;
-    top: -200%;
-    left: -200%;
+  z-index: -10;
+  position: absolute;
+  top: -200%;
+  left: -200%;
 }
