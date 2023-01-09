@@ -83,6 +83,11 @@ export default class Service {
     return newToken;
   };
 
+  /**
+   * Vérifie si le token est correct et appelle la méthode verifyToken du repository
+   * @param token Le token de l'utilisateur
+   * @returns L'utilisateur correspondant au token
+   */
   public verifyToken = async (token: string): Promise<User> => {
     const userFound = this.repo.verifyToken(token);
     if (!userFound) throw "Erreur, token invalide.";

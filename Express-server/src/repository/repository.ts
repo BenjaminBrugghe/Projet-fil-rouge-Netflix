@@ -49,7 +49,7 @@ export default class Repository {
   };
 
   /**
-   * Stocke les informations de l'utilisateur actuel dans le token
+   * Stocke les informations de l'utilisateur et crée un nouveau token
    * @param userLogged L'utilisateur connecté
    * @returns Le token de l'utilisateur
    */
@@ -59,6 +59,11 @@ export default class Repository {
     return newToken;
   };
 
+  /**
+   * Vérifie la validité du token
+   * @param token Le token à vérifier
+   * @returns L'utilisateur correspondant au token
+   */
   public verifyToken = (token: string): User => {
     const user = jwt.verify(token, jwt_secret);
     return user;

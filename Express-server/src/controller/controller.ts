@@ -49,16 +49,15 @@ export default class Controller {
     }
   };
 
+  /**
+   * Récupère le token de la requête et appelle la méthode verifyToken du service
+   */
   public verifyToken = async (req: Request, res: Response): Promise<void> => {
-    // const token = req.body.userToken;
     const token = req.headers.authorization!;
-    console.log("Verify-token : " + token); // (Terminal) Undefined
     try {
       const result = await this.service.verifyToken(token);
-      console.log("Verify : " + result.email);
       res.send(result);
     } catch (error) {
-      console.log("catch(err) "); // Je passe par ici
       res.send(error);
     }
   };
