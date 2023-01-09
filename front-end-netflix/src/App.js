@@ -14,3 +14,6 @@ function App() {
 }
 
 export default App;
+
+// npm start
+// npm run start:dev

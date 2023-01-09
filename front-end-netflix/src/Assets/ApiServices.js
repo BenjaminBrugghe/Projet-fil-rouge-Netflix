@@ -6,7 +6,7 @@ const Url_Users = "http://localhost:3001/Users";
 
 export default class Service {
 
-    // ********** USERS **********
+    // ******************** USERS ********************
 
     /**
      * Récupère la liste des utilisateurs
@@ -42,7 +42,7 @@ export default class Service {
 
     /**
      * Crée un token pour l'utilisateur connecté
-     * @param {User} user 
+     * @param {User} user Les informations de l'utilisateur
      * @returns {Promise<*>} Le token de l'utilisateur
      */
     createToken = async (user) => {
@@ -51,22 +51,24 @@ export default class Service {
         return data;
     };
 
+    /**
+     * Vérifie la validité du token et renvois les informations de l'utilisateur correspondant
+     * @param {string} token Le token de l'utilisateur
+     * @returns {Promise<*>} Les informations de l'utilisateur
+     */
     verifyToken = async (token) => {
-        console.log("token.userToken : ", token.userToken); // Le token est bon ici
         const response = await axios.get(Url_Users + "/verifyToken", {
             headers: {
                 'Authorization': `${token.userToken}`
             }
         }, token);
-
-        console.log("response : ", response); // Status 200 (OK)
         const data = await response.data;
-        console.log("data : ", data); // Invalid token
         return data;
     };
 
+    // updateUser
 
-    // ********** MOVIES **********
-    // ********** SERIES **********
-    // ********** DOCUMENTARIES **********
+    // ******************** MOVIES ********************
+    // ******************** SERIES ********************
+    // ***************** DOCUMENTARIES *****************
 }

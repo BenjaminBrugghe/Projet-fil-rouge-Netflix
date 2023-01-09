@@ -16,18 +16,18 @@ const Login = () => {
     const _navigate = useNavigate();
 
     /**
-     * Vérifie les informations afin de connecter l'utilisateur et le renvoyer vers /feed.
-     * Affiche une fenêtre avec un message en cas d'erreur.
+     * Envoi les informations saisies pour vérifier le token.
+     * Stocke le token dans le localStorage et redirige vers /feed
      */
     async function loginCLick() {
         // Création d'un objet avec les informations pour le token
-        const user = {
+        const userInfo = {
             email: email,
             password: password
         }
 
         // J'envois les informations pour vérifications
-        const newToken = await _service.createToken(user);
+        const newToken = await _service.createToken(userInfo);
 
         // Si le token est valide, je le stocke dans le localStorage et je redirige vers /feed
         localStorage.setItem("token", newToken);

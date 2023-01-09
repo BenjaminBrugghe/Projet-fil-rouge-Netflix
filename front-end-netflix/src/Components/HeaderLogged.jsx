@@ -1,15 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import { getAllUsers } from '../service/ApiServices';
-import axios from 'axios';
+import HeaderLinks from './HeaderLinks';
+import HeaderLinksAdmin from './HeaderLinksAdmin';
 
-const HeaderLogged = () => {
-    // Liste des utilisateurs.
-    const [userList, setUserList] = useState([]);
+const HeaderLogged = (user) => {
 
     // L'utilisateur connecté
-    const [currentUser, setCurrentuser] = useState('');
+    const [currentUser, setCurrentuser] = useState(user);
 
     // Affichage des options utilisateurs/admins du Header
     const [showUserOptions, setShowUserOptions] = useState(false);
@@ -18,59 +16,32 @@ const HeaderLogged = () => {
     // Affichage des informations de l'utilisateur connecté
     const [showAccountInfo, setShowAccountInfo] = useState(false);
 
-    /**
-     * Récupère la liste des utilisateurs (userList).
-     * Affiche les options d'administration si l'utilisateur est admin.
-     */
-    useEffect(() => {
-        async function getUsers() {
-            // const response = await axios.get(getAllUsers.getUsers);
-            // const data = await response.data;
-            // setUserList(data);
-        };
-        getUsers();
-
-        if (localStorage.getItem('userAdmin') == 0) {
-            setShowUserOptions(true);
-        }
-        else if (localStorage.getItem('userAdmin') == 1) {
+    // Pour afficher les options utilisateurs/admins du Header
+    useState(() => {
+        if (currentUser.user.admin == true) {
             setShowUserOptions(true);
             setShowAdminOptions(true);
+        } else {
+            setShowUserOptions(true);
         }
     }, []);
 
     /**
-     * Récupère les informations de l'utilisateur connecté.
-     */
+     * Ouvre ou ferme le menu "Mon compte"
+    */
     const accountClick = () => {
-        userList.forEach((el) => {
-            if (el.id == localStorage.getItem('userId')) {
-                setCurrentuser(el);
-            }
-        })
         setShowAccountInfo(!showAccountInfo);
     };
 
     return (
         <div className='header'>
             <div className="headerLogo"></div>
-            {showUserOptions && (
-                <div className="headerLinks">
-                    <Link className='headerLink'>Accueil</Link>
-                    <Link className='headerLink'>Séries</Link>
-                    <Link className='headerLink'>Films</Link>
-                </div>
-            )}
-            {showAdminOptions && (
-                <div className="headerIcons">
-                    <Link to='/manageUsers' className="headerUserIcon fa-solid fa-users" />
-                    <Link to='#' className="headerMovieIcon fa-sharp fa-solid fa-video" />
-                </div>
-            )}
-            <Link className='headerAccountBtn' onClick={accountClick}>Mon compte</Link>
+            {showUserOptions && (<HeaderLinks />)}
+            {showAdminOptions && (<HeaderLinksAdmin />)}
+            <button className='headerAccountBtn' onClick={accountClick}>Mon compte</button>
             {showAccountInfo && (
                 <div className='accountInfos'>
-                    <p>{currentUser.firstname} {currentUser.lastname}</p>
+                    <p>{currentUser.user.firstname} {currentUser.user.lastname}</p>
                     <Link to='/userAccount' className='accountMenu'>Gérer mon compte</Link>
                     <Link to='/' className='accountMenu'>Me déconnecter</Link>
                 </div>

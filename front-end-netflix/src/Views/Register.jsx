@@ -33,14 +33,16 @@ const Register = () => {
     // Pour vérifier que l'email n'est pas déjà utilisé
     const [emailAlreadyUsed, setEmailAlreadyUsed] = useState(true);
 
-    // Affiche une fenêtre avec un message affichant le succès de la création du compte.
+    /**
+     * Affiche une fenêtre avec un message affichant le succès de la création du compte.
+     */
     function registerSuccess() {
         setShowRegisterForm(!showRegisterForm);
         setShowSuccess(!showSuccess);
     };
 
     /**
-     * Effectue les vérifications pour les regex
+     * Effectue les vérifications des regex pour les données saisies par l'utilisateur
      * @param {string} lastname Le nom saisi par l'utilisateur
      * @param {string} firstname Le prénom saisi par l'utilisateur
      * @param {string} email L'email saisi par l'utilisateur
@@ -82,7 +84,6 @@ const Register = () => {
 
     /**
      * Vérifie que l'email saisi par l'utilisateur n'est pas déjà utilisé et affiche une alerte si c'est le cas
-     * @param {User[]} userList La liste des utilisateurs
      * @param {string} email L'email saisi par l'utilisateur
      */
     async function checkEmail(email) {
@@ -106,7 +107,7 @@ const Register = () => {
         // Vérification des Regex et correspondance des 2 mots de passe
         checkRegex(lastname, firstname, email, password, confirmPassword);
 
-        // Si tous les champs sont corrects, vérifie que l'email n'est pas déjà utilisé
+        // Si tous les champs sont corrects, je vérifie que l'email n'est pas déjà utilisé
         if (lastnameRegexOK && firstnameRegexOK && emailRegexOK && passwordRegexOK && confirmPasswordRegexOK) {
             checkEmail(email);
         }
