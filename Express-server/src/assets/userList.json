@@ -43,23 +43,5 @@
     "password": "GiveMeFive",
     "admin": false,
     "banned": false
-  },
-  {
-    "id": 6,
-    "lastname": "Post",
-    "firstname": "Post",
-    "email": "Post@email.com",
-    "password": "Azerty!0",
-    "admin": false,
-    "banned": false
-  },
-  {
-    "id": 7,
-    "lastname": "Post",
-    "firstname": "Postagain",
-    "email": "Post2@email.com",
-    "password": "Azerty!0",
-    "admin": false,
-    "banned": false
   }
 ]
