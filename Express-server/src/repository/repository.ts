@@ -98,8 +98,8 @@ export default class Repository {
    * @param newBanStatus Le nouveau statut du booleen "banned"
    * @returns L'utilisateur modifié
    */
-  public banOrUnban = (index: number, newBanStatus: boolean): User => {
-    this.userList[index].banned = newBanStatus;
+  public banOrUnban = (index: number): User => {
+    this.userList[index].banned = !this.userList[index].banned;
     SaveList();
     return this.userList[index];
   };

@@ -147,14 +147,15 @@ export default class Service {
   };
 
   /**
-   * Appelle la méthode banOrUnban du repository
+   * Récupère l'index de l'utilisateur à modifier et appelle la méthode banOrUnban du repository
    * @param id L'id de l'utilisateur à bannir ou débannir
    * @param newBanStatus Le nouveau statut du booléen
    */
-  public banOrUnban = (id: number, newBanStatus: boolean): void => {
+  public banOrUnban = (id: number): User => {
     const index = this.repo.getAllUsers().indexOf(this.getUserById(id));
     if (index.toString() == "") throw "Erreur, id introuvable.";
-    this.repo.banOrUnban(index, newBanStatus);
+    const userModified = this.repo.banOrUnban(index);
+    return userModified;
   };
 
   /**

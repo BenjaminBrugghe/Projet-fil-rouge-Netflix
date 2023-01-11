@@ -24,8 +24,8 @@ export default class Service {
      * @returns {Promise<*>} L'utilisateur correspondant à l'email
      */
     getUserByEmail = async (email) => {
-        const response = await this.getAllUsers();
-        const user = response.find(user => user.email == email);
+        const response = await axios.get(Url_Users + `/login/${email}`);
+        const user = await response.data;
         return user;
     };
 
@@ -62,6 +62,12 @@ export default class Service {
                 'Authorization': `${token.userToken}`
             }
         }, token);
+        const data = await response.data;
+        return data;
+    };
+
+    banOrUnbanUser = async (id) => {
+        const response = await axios.patch(Url_Users + `/ban/${id}`);
         const data = await response.data;
         return data;
     };

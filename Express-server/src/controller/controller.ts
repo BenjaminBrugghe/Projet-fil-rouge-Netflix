@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Service from "../service/service";
+import User from "../models/users";
 
 export default class Controller {
   // Attributs
@@ -103,9 +104,8 @@ export default class Controller {
    */
   public banOrUnban = (req: Request, res: Response): void => {
     const id: string = req.params.id;
-    const newBanStatus: boolean = req.body.banned;
-    this.service.banOrUnban(+id, newBanStatus);
-    res.send(newBanStatus);
+    const userModified = this.service.banOrUnban(+id);
+    res.send(userModified);
   };
 
   /**
