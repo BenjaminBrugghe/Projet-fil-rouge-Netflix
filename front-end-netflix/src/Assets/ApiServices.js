@@ -72,6 +72,12 @@ export default class Service {
         return data;
     };
 
+    checkBanStatus = async (email) => {
+        const response = await axios.get(Url_Users + `/status/${email}`);
+        const data = await response.data;
+        return data;
+    };
+
     // updateUser
 
     // ******************** MOVIES ********************

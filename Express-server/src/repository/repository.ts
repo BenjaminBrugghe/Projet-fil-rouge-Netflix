@@ -105,6 +105,16 @@ export default class Repository {
   };
 
   /**
+   * Vérifie le statut du booleen "banned" d'un utilisateur
+   * @param email L'email de l'utilisateur à vérifier
+   * @returns Le statut du booleen "banned" de l'utilisateur
+   */
+  public checkBanStatus = (email: string): string => {
+    const userFound = this.userList.find((user) => user.email == email)!;
+    return userFound.banned.toString();
+  };
+
+  /**
    * Supprime un utilisateur grâce à son index
    * @param index L'index de l'utilisateur à supprimer
    */

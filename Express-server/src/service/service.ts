@@ -159,6 +159,17 @@ export default class Service {
   };
 
   /**
+   * Appelle la méthode checkBanStatus du repository
+   * @param email L'email de l'utilisateur à vérifier
+   * @returns Le statut du booléen de l'utilisateur
+   */
+  public checkBanStatus = (email: string): string => {
+    const response = this.repo.checkBanStatus(email);
+    if (!response) throw "Erreur, email introuvable.";
+    return response;
+  };
+
+  /**
    * Appelle la méthode deleteUser du repository
    * @param id L'id de l'utilisateur à supprimer
    */

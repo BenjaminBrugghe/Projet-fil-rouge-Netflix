@@ -32,7 +32,7 @@ export default class Controller {
    * Récupère l'email de la requête et appelle la méthode getUserByEmail du service
    */
   public getUserByEmail = (req: Request, res: Response): void => {
-    const email = req.params.email;
+    const email: string = req.params.email;
     res.send(this.service.getUserByEmail(email));
   };
 
@@ -106,6 +106,14 @@ export default class Controller {
     const id: string = req.params.id;
     const userModified = this.service.banOrUnban(+id);
     res.send(userModified);
+  };
+
+  /**
+   * Récupère l'email de la requête et appelle la méthode checkBanStatus du service
+   */
+  public checkBanStatus = (req: Request, res: Response): void => {
+    const email: string = req.params.email;
+    res.send(this.service.checkBanStatus(email));
   };
 
   /**

@@ -15,6 +15,7 @@ router.get("/Users", controller.getAllUsers);
 router.get("/Users/verifyToken", controller.verifyToken);
 router.get("/Users/:id", controller.getUserById);
 router.get("/Users/login/:email", controller.getUserByEmail);
+router.get("/Users/status/:email", controller.checkBanStatus);
 router.post("/Users", controller.createUser);
 router.post("/Users/token", controller.createToken);
 router.put("/Users/:id", controller.editUser);
