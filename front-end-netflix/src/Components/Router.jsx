@@ -16,9 +16,14 @@ const Router = () => {
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+
+                {/* Protected */}
                 <Route path='/feed' element={<Feed />} />
                 <Route path='/userAccount' element={<UserAccount />} />
+
+                {/* Protected Admin */}
                 <Route path='/manageUsers' element={<ManageUsers />} />
+
                 <Route path='/*' element={<Error404 />} />
             </Routes>
         </BrowserRouter>

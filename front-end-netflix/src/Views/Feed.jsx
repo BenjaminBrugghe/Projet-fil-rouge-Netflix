@@ -7,12 +7,12 @@ import Unauthorized from './Unauthorized';
 
 const Feed = () => {
 
+    const _service = new Service();
+    const [userLogged, setUserLogged] = useState({});
+
     const [movieList, setMovieList] = useState([]);
     const [documentaryList, setDocumentaryList] = useState([]);
     const [currentVideo, setCurrentVideo] = useState('');
-
-    const _service = new Service();
-    const [userLogged, setUserLogged] = useState({});
 
     // Récupère le token dans le localStorage et effectue une requête pour récupérer les informations de l'utilisateur connecté
     useEffect(() => {
