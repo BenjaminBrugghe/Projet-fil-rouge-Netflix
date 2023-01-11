@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../Components/Header';
 import Service from '../Assets/ApiServices';
 
+import bcrypt from 'bcryptjs';
+
 const Login = () => {
 
     // Pour récupérer les informations de l'utilisateur
@@ -15,6 +17,11 @@ const Login = () => {
 
     const _navigate = useNavigate();
 
+    async function hashPassword(password) {
+        const saltRounds = 10;
+        return await bcrypt.hash(password, saltRounds);
+    };
+
     /**
      * Envoi les informations saisies pour vérifier le token.
      * Stocke le token dans le localStorage et redirige vers /feed
@@ -24,14 +31,22 @@ const Login = () => {
         const userInfo = {
             email: email,
             password: password
+            // password: hashPassword(password) // LocalStorage => token.value = "Erreur, mot de passe incorrect."
         }
 
-        // J'envois les informations pour vérifications
-        const newToken = await _service.createToken(userInfo);
+        // Vérifie si l'utilisateur est banni
+        const isBanned = await _service.checkBanStatus(userInfo.email);
+        if (isBanned == true) {
+            alert("Erreur, votre compte a été suspendu.");
+        }
+        else {
+            // J'envois les informations pour vérifications
+            const newToken = await _service.createToken(userInfo);
 
-        // Si le token est valide, je le stocke dans le localStorage et je redirige vers /feed
-        localStorage.setItem("token", newToken);
-        _navigate('/feed');
+            // Stocke le token dans le localStorage et redirige vers /feed
+            localStorage.setItem("token", newToken);
+            _navigate('/feed');
+        }
     };
 
     return (
